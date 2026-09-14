@@ -1,83 +1,21 @@
 'use client'
 
-import { useState } from 'react'
-import { ChevronDown, ChevronUp, GripVertical, Plus, Trash2 } from 'lucide-react'
-import type { Exercise, MuscleGroup, PlanExercise, TrackingMode } from '@/types'
-import { useCalisthenicsPlan } from '@/hooks/useCalisthenicsPlan'
+import { ChevronDown, ChevronUp, GripVertical, Trash2, PersonStanding } from 'lucide-react'
+import type { Exercise, PlanExercise } from '@/types'
+import { usePlanEditor } from '@/hooks/usePlanEditor'
 import { useExercises } from '@/hooks/useExercises'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
 import { EmptyState } from '@/components/common/EmptyState'
-import { PersonStanding } from 'lucide-react'
-
-const MUSCLE_OPTIONS: { value: MuscleGroup; label: string }[] = [
-  { value: 'pecho', label: 'Pecho' },
-  { value: 'espalda', label: 'Espalda' },
-  { value: 'hombros', label: 'Hombros' },
-  { value: 'biceps', label: 'Bíceps' },
-  { value: 'triceps', label: 'Tríceps' },
-  { value: 'antebrazos', label: 'Antebrazos' },
-  { value: 'piernas', label: 'Piernas' },
-  { value: 'gluteos', label: 'Glúteos' },
-  { value: 'abdominales', label: 'Abdominales' },
-  { value: 'pantorrillas', label: 'Pantorrillas' },
-  { value: 'cuerpo-completo', label: 'Cuerpo completo' },
-  { value: 'otro', label: 'Otro' },
-]
-
-const TRACKING_OPTIONS: { value: TrackingMode; label: string }[] = [
-  { value: 'reps', label: 'Repeticiones' },
-  { value: 'time', label: 'Tiempo' },
-  { value: 'distance', label: 'Distancia' },
-]
-
-interface NewExerciseFormState {
-  name: string
-  muscleGroup: MuscleGroup
-  trackingMode: TrackingMode
-  targetSets: string
-  targetReps: string
-  restSeconds: string
-}
-
-const EMPTY_FORM: NewExerciseFormState = { name: '', muscleGroup: 'cuerpo-completo', trackingMode: 'reps', targetSets: '3', targetReps: '', restSeconds: '60' }
+import { AddExerciseDialog } from './AddExerciseDialog'
 
 export function CalisthenicsEditor({ storageReady }: { storageReady: boolean }) {
-  const { plan, addExercise, updateExercise, removeExercise, moveExercise } = useCalisthenicsPlan(storageReady)
-  const { exercises, add: addExerciseRecord } = useExercises(storageReady)
-  const [dialogOpen, setDialogOpen] = useState(false)
-  const [form, setForm] = useState<NewExerciseFormState>(EMPTY_FORM)
+  const { plan, updateExercise, removeExercise, moveExercise, refresh } = usePlanEditor('calistenia', storageReady)
+  const { exercises } = useExercises(storageReady)
 
   const exerciseMap = Object.fromEntries(exercises.map((e) => [e.id, e]))
   const sortedPlanExercises = plan?.exercises.slice().sort((a, b) => a.order - b.order) ?? []
-
-  async function handleCreate() {
-    if (!form.name.trim()) return
-    const created = await addExerciseRecord({
-      name: form.name.trim(),
-      aliases: [],
-      muscleGroup: form.muscleGroup,
-      secondaryMuscles: [],
-      category: 'calistenia',
-      trackingMode: form.trackingMode,
-      equipment: [],
-      instructions: [],
-      commonMistakes: [],
-      alternatives: [],
-      image: { gifUrl: null, customUrl: null, sourceSlug: null },
-      hidden: false,
-      isCustom: true,
-      source: 'custom',
-      order: exercises.length,
-    })
-    await addExercise(created.id, Number(form.targetSets) || 3, form.targetReps.trim() || null, Number(form.restSeconds) || 60)
-    setForm(EMPTY_FORM)
-    setDialogOpen(false)
-  }
 
   if (!plan) return null
 
@@ -105,88 +43,9 @@ export function CalisthenicsEditor({ storageReady }: { storageReady: boolean }) 
         )
       })}
 
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogTrigger
-          render={
-            <Button variant="outline" className="justify-self-start">
-              <Plus /> Agregar ejercicio
-            </Button>
-          }
-        />
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Nuevo ejercicio de calistenia</DialogTitle>
-          </DialogHeader>
-          <div style={{ display: 'grid', gap: 12 }}>
-            <div>
-              <Label htmlFor="ex-name">Nombre</Label>
-              <Input id="ex-name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} placeholder="Ej: Fondos en banco" />
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-              <div>
-                <Label>Grupo muscular</Label>
-                <Select
-                  items={Object.fromEntries(MUSCLE_OPTIONS.map((o) => [o.value, o.label]))}
-                  value={form.muscleGroup}
-                  onValueChange={(v) => setForm((f) => ({ ...f, muscleGroup: v as MuscleGroup }))}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {MUSCLE_OPTIONS.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label>Se mide en</Label>
-                <Select
-                  items={Object.fromEntries(TRACKING_OPTIONS.map((o) => [o.value, o.label]))}
-                  value={form.trackingMode}
-                  onValueChange={(v) => setForm((f) => ({ ...f, trackingMode: v as TrackingMode }))}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {TRACKING_OPTIONS.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
-              <div>
-                <Label htmlFor="ex-sets">Series</Label>
-                <Input id="ex-sets" inputMode="numeric" value={form.targetSets} onChange={(e) => setForm((f) => ({ ...f, targetSets: e.target.value }))} />
-              </div>
-              <div>
-                <Label htmlFor="ex-reps">Objetivo</Label>
-                <Input id="ex-reps" value={form.targetReps} onChange={(e) => setForm((f) => ({ ...f, targetReps: e.target.value }))} placeholder="Ej: 12-15 reps" />
-              </div>
-              <div>
-                <Label htmlFor="ex-rest">Descanso (s)</Label>
-                <Input id="ex-rest" inputMode="numeric" value={form.restSeconds} onChange={(e) => setForm((f) => ({ ...f, restSeconds: e.target.value }))} />
-              </div>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setDialogOpen(false)}>
-              Cancelar
-            </Button>
-            <Button onClick={handleCreate} disabled={!form.name.trim()}>
-              Agregar
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <div style={{ justifySelf: 'start' }}>
+        <AddExerciseDialog planId="calistenia" category="calistenia" storageReady={storageReady} onAdded={refresh} />
+      </div>
     </div>
   )
 }

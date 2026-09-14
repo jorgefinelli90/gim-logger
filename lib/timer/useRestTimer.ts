@@ -7,17 +7,23 @@ export interface RestTimerState {
   remainingSeconds: number
   running: boolean
   label: string | null
+  /** Which exercise started this rest, so its card can show the live countdown. */
+  sourceId: string | null
+  /** True while a rest is counting down or paused part-way through. */
+  active: boolean
 }
 
 export interface RestTimerActions {
-  start: (seconds: number, label?: string | null) => void
+  start: (seconds: number, label?: string | null, sourceId?: string | null) => void
   pause: () => void
   resume: () => void
   reset: () => void
   addSeconds: (delta: number) => void
 }
 
-const INITIAL_STATE: RestTimerState = { totalSeconds: 90, remainingSeconds: 90, running: false, label: null }
+type InternalState = Omit<RestTimerState, 'active'>
+
+const INITIAL_STATE: InternalState = { totalSeconds: 90, remainingSeconds: 90, running: false, label: null, sourceId: null }
 
 /**
  * Rest timer driven by wall-clock timestamps (not a naive setInterval
@@ -25,7 +31,7 @@ const INITIAL_STATE: RestTimerState = { totalSeconds: 90, remainingSeconds: 90, 
  * background while the user keeps navigating the app.
  */
 export function useRestTimer(soundEnabled: boolean, vibrationEnabled: boolean): RestTimerState & RestTimerActions {
-  const [state, setState] = useState<RestTimerState>(INITIAL_STATE)
+  const [state, setState] = useState<InternalState>(INITIAL_STATE)
   const endTimeRef = useRef<number | null>(null)
   const frameRef = useRef<number | null>(null)
 
@@ -56,9 +62,9 @@ export function useRestTimer(soundEnabled: boolean, vibrationEnabled: boolean): 
     }
   }, [])
 
-  const start = useCallback((seconds: number, label: string | null = null) => {
+  const start = useCallback((seconds: number, label: string | null = null, sourceId: string | null = null) => {
     endTimeRef.current = Date.now() + seconds * 1000
-    setState({ totalSeconds: seconds, remainingSeconds: seconds, running: true, label })
+    setState({ totalSeconds: seconds, remainingSeconds: seconds, running: true, label, sourceId })
     if (frameRef.current) clearTimeout(frameRef.current)
     tickRef.current()
   }, [])
@@ -80,7 +86,7 @@ export function useRestTimer(soundEnabled: boolean, vibrationEnabled: boolean): 
   const reset = useCallback(() => {
     if (frameRef.current) clearTimeout(frameRef.current)
     endTimeRef.current = null
-    setState((s) => ({ ...s, remainingSeconds: s.totalSeconds, running: false }))
+    setState((s) => ({ ...s, remainingSeconds: s.totalSeconds, running: false, sourceId: null }))
   }, [])
 
   const addSeconds = useCallback((delta: number) => {
@@ -91,7 +97,9 @@ export function useRestTimer(soundEnabled: boolean, vibrationEnabled: boolean): 
     })
   }, [])
 
-  return { ...state, start, pause, resume, reset, addSeconds }
+  const active = state.running || (state.remainingSeconds > 0 && state.remainingSeconds < state.totalSeconds)
+
+  return { ...state, active, start, pause, resume, reset, addSeconds }
 }
 
 function playBeep() {

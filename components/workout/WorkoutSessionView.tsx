@@ -8,6 +8,7 @@ import { useWorkoutSession } from '@/hooks/useWorkoutSession'
 import { useExercises } from '@/hooks/useExercises'
 import { useDailyNote } from '@/hooks/useDailyNote'
 import { ExerciseSessionCard } from './ExerciseSessionCard'
+import { AddExerciseDialog } from './AddExerciseDialog'
 import { RestTimerCard } from '@/components/timer/RestTimerCard'
 import { DailyNoteEditor } from '@/components/notes/DailyNoteEditor'
 import { EmptyState } from '@/components/common/EmptyState'
@@ -101,6 +102,14 @@ export function WorkoutSessionView({ date, type, title, subtitle, typeBadge }: W
             )
           })}
         </div>
+
+        {/* Calisthenics is the freely editable routine — the gym days come
+            from the spreadsheet and are edited there. */}
+        {session.plan.type === 'calistenia' && (
+          <div style={{ marginTop: 14 }}>
+            <AddExerciseDialog planId={session.plan.id} category="calistenia" storageReady={ready} onAdded={session.refresh} />
+          </div>
+        )}
       </div>
       <aside className="right-column">
         <RestTimerCard />

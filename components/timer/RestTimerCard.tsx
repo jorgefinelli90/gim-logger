@@ -27,13 +27,15 @@ export function RestTimerCard() {
           <TimerReset aria-hidden />
         </button>
       </div>
-      <div className="timer-display" aria-live="polite">
+      {/* No aria-live on the ticking digits — it would announce every second.
+          The status line below announces the state changes instead. */}
+      <div className="timer-display">
         {mm}
         <small>:</small>
         {ss}
       </div>
       {timer.label && <p style={{ marginTop: -10 }}>{timer.label}</p>}
-      <p>{timer.running ? 'El descanso está corriendo' : timer.remainingSeconds === 0 ? '¡Descanso terminado!' : 'Listo para tu próxima serie'}</p>
+      <p aria-live="polite">{timer.running ? 'El descanso está corriendo' : timer.remainingSeconds === 0 ? '¡Descanso terminado!' : 'Listo para tu próxima serie'}</p>
 
       <div style={{ display: 'flex', gap: 6, marginBottom: 10, flexWrap: 'wrap' }}>
         {QUICK_VALUES.map((seconds) => (
@@ -59,7 +61,7 @@ export function RestTimerCard() {
         className={`timer-button ${timer.running ? 'running' : ''}`}
         onClick={() => (timer.running ? timer.pause() : timer.remainingSeconds > 0 ? timer.resume() : timer.start(preferences.defaultRestSeconds))}
       >
-        {timer.running ? <Pause aria-hidden /> : <Play aria-hidden />} {timer.running ? 'Pausar descanso' : timer.remainingSeconds > 0 && timer.remainingSeconds < timer.totalSeconds ? 'Reanudar' : 'Iniciar descanso'}
+        {timer.running ? <Pause aria-hidden /> : <Play aria-hidden />} {timer.running ? 'Pausar descanso' : timer.active ? 'Reanudar' : 'Iniciar descanso'}
       </button>
     </section>
   )

@@ -56,25 +56,32 @@ export function useWorkoutSession(date: string, type: SessionType, storageReady:
       const exerciseMap = Object.fromEntries(allExercises.map((e) => [e.id, e]))
 
       let sets = await getSetsBySession(session.id)
-      if (sets.length === 0 && plan) {
-        const scaffold = plan.exercises.flatMap((pe) =>
-          Array.from({ length: pe.targetSets }, (_, i) => ({
-            sessionId: session.id,
-            exerciseId: pe.exerciseId,
-            setIndex: i,
-            targetReps: pe.targetReps,
-            actualReps: null,
-            weight: null,
-            unit: defaultUnit,
-            rpe: null,
-            durationSeconds: null,
-            distanceMeters: null,
-            note: null,
-            completed: false,
-            completedAt: null,
-          })),
-        )
-        sets = await seedSetsForSession(scaffold)
+      if (plan) {
+        // Scaffold per plan-exercise, not all-or-nothing: an exercise added to
+        // the plan mid-session needs its set rows created too.
+        const alreadyScaffolded = new Set(sets.map((s) => s.exerciseId))
+        const scaffold = plan.exercises
+          .filter((pe) => !alreadyScaffolded.has(pe.exerciseId))
+          .flatMap((pe) =>
+            Array.from({ length: pe.targetSets }, (_, i) => ({
+              sessionId: session.id,
+              exerciseId: pe.exerciseId,
+              setIndex: i,
+              targetReps: pe.targetReps,
+              actualReps: null,
+              weight: null,
+              unit: defaultUnit,
+              rpe: null,
+              durationSeconds: null,
+              distanceMeters: null,
+              note: null,
+              completed: false,
+              completedAt: null,
+            })),
+          )
+        if (scaffold.length > 0) {
+          sets = [...sets, ...(await seedSetsForSession(scaffold))]
+        }
       }
 
       const setsByExercise: Record<string, ExerciseSet[]> = {}

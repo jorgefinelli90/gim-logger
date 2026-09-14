@@ -40,6 +40,9 @@ export function ExerciseSessionCard({
 
   const completed = sets.filter((s) => s.completed).length
   const restSeconds = planExercise?.restSeconds
+  const restRunning = timer.active && timer.sourceId === exercise.id
+  const restMm = String(Math.floor(timer.remainingSeconds / 60)).padStart(2, '0')
+  const restSs = String(timer.remainingSeconds % 60).padStart(2, '0')
 
   return (
     <article className={`exercise-card ${completed === sets.length && sets.length > 0 ? 'complete' : ''}`} style={{ flexDirection: 'column', alignItems: 'stretch', height: 'auto', padding: 14 }}>
@@ -96,11 +99,26 @@ export function ExerciseSessionCard({
         {restSeconds != null && (
           <button
             type="button"
-            onClick={() => timer.start(restSeconds, exercise.name)}
+            onClick={() => timer.start(restSeconds, exercise.name, exercise.id)}
             className="icon-button"
-            style={{ display: 'flex', gap: 5, alignItems: 'center', fontSize: 11, border: '1px solid var(--border)', borderRadius: 8, padding: '6px 10px', marginLeft: 'auto' }}
+            aria-label={restRunning ? `Descanso en curso, ${restMm}:${restSs} restantes. Tocá para reiniciarlo.` : `Iniciar descanso de ${restSeconds} segundos`}
+            style={{
+              display: 'flex',
+              gap: 5,
+              alignItems: 'center',
+              fontSize: 11,
+              fontWeight: restRunning ? 700 : 400,
+              fontVariantNumeric: 'tabular-nums',
+              border: `1px solid ${restRunning ? 'var(--lime)' : 'var(--border)'}`,
+              borderRadius: 8,
+              padding: '6px 10px',
+              marginLeft: 'auto',
+              background: restRunning ? 'var(--lime)' : 'transparent',
+              color: restRunning ? 'var(--ink)' : 'var(--muted)',
+              transition: 'background .15s ease, color .15s ease, border-color .15s ease',
+            }}
           >
-            <Clock3 size={14} /> Descanso {restSeconds}s
+            <Clock3 size={14} /> {restRunning ? `${restMm}:${restSs}` : `Descanso ${restSeconds}s`}
           </button>
         )}
       </div>
