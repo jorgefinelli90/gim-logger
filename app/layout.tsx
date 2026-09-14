@@ -1,6 +1,7 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import { AppShell } from '@/components/layout/AppShell'
+import { getThemeInitScript } from '@/lib/theme/theme-script'
 
 export const metadata: Metadata = {
   title: 'Iron Log · Tu entrenamiento',
@@ -39,10 +40,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="es" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: getThemeInitScript() }} />
+      </head>
       <body className="antialiased">
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   )

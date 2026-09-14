@@ -1,0 +1,485 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-14T18:48:33.801Z",
+  "sourceFile": "rutina-para-Jorge-sept-2026-144bd5.xlsx",
+  "sourceSheet": "Hoja1",
+  "days": [
+    {
+      "dayNumber": 1,
+      "title": "Gimnasio · Día 1",
+      "subtitle": "Pecho, Tríceps y Antebrazo",
+      "exercises": [
+        {
+          "id": "g1-0-pecho-press-superior-con-barra-en-maquina",
+          "order": 0,
+          "muscleGroupRaw": "PECHO",
+          "name": "Press superior con barra en máquina",
+          "targetSets": 4,
+          "targetReps": "8-12 reps",
+          "setsRepsRaw": "4 series (8-12 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 90,
+          "restRaw": "90 segundos",
+          "benefit": "Enfoca el trabajo en la porción clavicular (superior) del pectoral.",
+          "tip": "Mantén los codos ligeramente cerrados (no abiertos a 90 grados) para proteger tus hombros."
+        },
+        {
+          "id": "g1-1-pecho-press-plano-en-maquina",
+          "order": 1,
+          "muscleGroupRaw": "PECHO",
+          "name": "Press plano en máquina",
+          "targetSets": 3,
+          "targetReps": "8-12 reps",
+          "setsRepsRaw": "3 series (8-12 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 90,
+          "restRaw": "90 segundos",
+          "benefit": "Permite aplicar fuerza máxima de forma segura en todo el pectoral.",
+          "tip": "Retrae los omóplatos antes de empujar y no despegues la espalda del respaldo."
+        },
+        {
+          "id": "g1-2-pecho-fondos-en-paralelas-maquina",
+          "order": 2,
+          "muscleGroupRaw": "PECHO",
+          "name": "Fondos en paralelas / máquina",
+          "targetSets": 3,
+          "targetReps": "Al fallo",
+          "setsRepsRaw": "3 series (Al fallo)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 120,
+          "restRaw": "2 minutos",
+          "benefit": "Desarrolla la masa global del pecho inferior y tríceps.",
+          "tip": "Inclina levemente el torso hacia adelante para enfatizar el pecho en lugar de los brazos."
+        },
+        {
+          "id": "g1-3-tricpes-extension-de-triceps-sobre-la-cabeza-con-soga",
+          "order": 3,
+          "muscleGroupRaw": "TRICPES",
+          "name": "Extensión de tríceps sobre la cabeza con soga",
+          "targetSets": 3,
+          "targetReps": "10-12 reps",
+          "setsRepsRaw": "3 series (10-12 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 75,
+          "restRaw": "60-90 segundos",
+          "benefit": "Aísla completamente el tríceps con tensión continua de la polea.",
+          "tip": "Mantén los codos fijos a los costados del cuerpo; evita que se muevan hacia adelante y atrás."
+        },
+        {
+          "id": "g1-4-tricpes-extension-de-triceps-con-barra-recta",
+          "order": 4,
+          "muscleGroupRaw": "TRICPES",
+          "name": "Extensión de tríceps con barra recta",
+          "targetSets": 3,
+          "targetReps": "10-12 reps",
+          "setsRepsRaw": "3 series (10-12 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 75,
+          "restRaw": "60-90 segundos",
+          "benefit": "Aísla completamente el tríceps con tensión continua de la polea.",
+          "tip": "Mantén los codos fijos a los costados del cuerpo; evita que se muevan hacia adelante y atrás."
+        },
+        {
+          "id": "g1-5-tricpes-extension-de-triceps-con-soga-agarre-neutro",
+          "order": 5,
+          "muscleGroupRaw": "TRICPES",
+          "name": "Extensión de tríceps con soga (agarre neutro)",
+          "targetSets": 3,
+          "targetReps": "12 reps",
+          "setsRepsRaw": "3 series (12 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 75,
+          "restRaw": "60-90 segundos",
+          "benefit": "Aísla completamente el tríceps con tensión continua de la polea.",
+          "tip": "Mantén los codos fijos a los costados del cuerpo; evita que se muevan hacia adelante y atrás."
+        },
+        {
+          "id": "g1-6-antebrazos-curl-de-muneca-en-supinacion-con-barra-recta",
+          "order": 6,
+          "muscleGroupRaw": "ANTEBRAZOS",
+          "name": "Curl de muñeca en supinación con barra recta",
+          "targetSets": 3,
+          "targetReps": "15 reps",
+          "setsRepsRaw": "3 series (15 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 60,
+          "restRaw": "60 segundos",
+          "benefit": "Fortalece los flexores del antebrazo y mejora la fuerza de agarre.",
+          "tip": "Realiza un recorrido completo, permitiendo que la barra ruede hacia los dedos antes de subir."
+        },
+        {
+          "id": "g1-7-antebrazos-flexion-de-muneca-con-polea-por-detras",
+          "order": 7,
+          "muscleGroupRaw": "ANTEBRAZOS",
+          "name": "Flexión de muñeca con polea por detrás",
+          "targetSets": 3,
+          "targetReps": "15-20 reps",
+          "setsRepsRaw": "3 series (15-20 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 60,
+          "restRaw": "60 segundos",
+          "benefit": null,
+          "tip": null
+        }
+      ]
+    },
+    {
+      "dayNumber": 2,
+      "title": "Gimnasio · Día 2",
+      "subtitle": "Espalda, Bíceps y Hombros",
+      "exercises": [
+        {
+          "id": "g2-0-espalda-jalon-al-pecho-en-polea",
+          "order": 0,
+          "muscleGroupRaw": "ESPALDA",
+          "name": "Jalón al pecho en polea",
+          "targetSets": 4,
+          "targetReps": "8-12 reps",
+          "setsRepsRaw": "4 series (8-12 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 90,
+          "restRaw": "90 segundos",
+          "benefit": "Aumenta la anchura de la espalda (dorsales) y mejora la postura.",
+          "tip": "Piensa en llevar los codos hacia tus bolsillos en lugar de tirar solo con las manos."
+        },
+        {
+          "id": "g2-1-espalda-remo-en-maquina-o-polea-baja",
+          "order": 1,
+          "muscleGroupRaw": "ESPALDA",
+          "name": "Remo en máquina o polea baja",
+          "targetSets": 3,
+          "targetReps": "8-12 reps",
+          "setsRepsRaw": "3 series (8-12 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 90,
+          "restRaw": "90 segundos",
+          "benefit": "Aporta grosor a la parte central de la espalda.",
+          "tip": "Mantén el torso estable y haz una pausa de un segundo en la máxima contracción atrás."
+        },
+        {
+          "id": "g2-2-espalda-pullover-en-polea-alta",
+          "order": 2,
+          "muscleGroupRaw": "ESPALDA",
+          "name": "Pullover en polea alta",
+          "targetSets": 3,
+          "targetReps": "12-15 reps",
+          "setsRepsRaw": "3 series (12-15 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 75,
+          "restRaw": "60-90 segundos",
+          "benefit": null,
+          "tip": null
+        },
+        {
+          "id": "g2-3-biceps-curl-con-barra-z-o-recta",
+          "order": 3,
+          "muscleGroupRaw": "BICEPS",
+          "name": "Curl con barra Z o recta",
+          "targetSets": 3,
+          "targetReps": "10-12 reps",
+          "setsRepsRaw": "3 series (10-12 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 90,
+          "restRaw": "90 segundos",
+          "benefit": null,
+          "tip": null
+        },
+        {
+          "id": "g2-4-biceps-curl-martillo-con-mancuernas",
+          "order": 4,
+          "muscleGroupRaw": "BICEPS",
+          "name": "Curl martillo con mancuernas",
+          "targetSets": 3,
+          "targetReps": "10-12 reps",
+          "setsRepsRaw": "3 series (10-12 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 75,
+          "restRaw": "60-90 segundos",
+          "benefit": "Estimula el crecimiento de los bíceps mediante carga directa.",
+          "tip": "Evita balancear el cuerpo; controla la bajada (fase excéntrica)."
+        },
+        {
+          "id": "g2-5-biceps-curl-en-polea-baja",
+          "order": 5,
+          "muscleGroupRaw": "BICEPS",
+          "name": "Curl en polea baja",
+          "targetSets": 3,
+          "targetReps": "12 reps",
+          "setsRepsRaw": "3 series (12 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 75,
+          "restRaw": "60-90 segundos",
+          "benefit": "Estimula el crecimiento de los bíceps mediante carga directa.",
+          "tip": "Evita balancear el cuerpo; controla la bajada (fase excéntrica)."
+        },
+        {
+          "id": "g2-6-hombros-press-militar-con-mancuernas-o-maquina",
+          "order": 6,
+          "muscleGroupRaw": "HOMBROS",
+          "name": "Press militar con mancuernas o máquina",
+          "targetSets": 3,
+          "targetReps": "8-10 reps",
+          "setsRepsRaw": "3 series (8-10 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 120,
+          "restRaw": "2 minutos",
+          "benefit": "Enfoca el trabajo en la porción clavicular (superior) del pectoral.",
+          "tip": "Mantén los codos ligeramente cerrados (no abiertos a 90 grados) para proteger tus hombros."
+        },
+        {
+          "id": "g2-7-hombros-elevaciones-laterales-con-mancuernas-polea",
+          "order": 7,
+          "muscleGroupRaw": "HOMBROS",
+          "name": "Elevaciones laterales con mancuernas/polea",
+          "targetSets": 4,
+          "targetReps": "12-15 reps",
+          "setsRepsRaw": "4 series (12-15 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 60,
+          "restRaw": "60 segundos",
+          "benefit": "Crea la ilusión visual de hombros más anchos (fascículo lateral).",
+          "tip": "Sube los brazos de forma controlada y evita levantar los trapecios hacia las orejas."
+        },
+        {
+          "id": "g2-8-hombros-elevaciones-frontales-con-mancuernas-polea",
+          "order": 8,
+          "muscleGroupRaw": "HOMBROS",
+          "name": "Elevaciones frontales con mancuernas/polea",
+          "targetSets": 4,
+          "targetReps": "12-15 reps",
+          "setsRepsRaw": "4 series (12-15 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 60,
+          "restRaw": "60 segundos",
+          "benefit": null,
+          "tip": null
+        }
+      ]
+    },
+    {
+      "dayNumber": 3,
+      "title": "Gimnasio · Día 3",
+      "subtitle": "Piernas y Abdomen",
+      "exercises": [
+        {
+          "id": "g3-0-piernas-prensa-de-pierna-inclinada",
+          "order": 0,
+          "muscleGroupRaw": "PIERNAS",
+          "name": "Prensa de pierna inclinada",
+          "targetSets": 4,
+          "targetReps": "8-12 reps",
+          "setsRepsRaw": "4 series (8-12 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 120,
+          "restRaw": "2 minutos",
+          "benefit": "Trabaja cuádriceps y glúteos con alta carga sin comprometer la columna.",
+          "tip": "No bajes tanto como para que la zona lumbar se despegue o se curve en la plataforma."
+        },
+        {
+          "id": "g3-1-piernas-extensiones-de-cuadriceps-en-maquina",
+          "order": 1,
+          "muscleGroupRaw": "PIERNAS",
+          "name": "Extensiones de cuádriceps en máquina",
+          "targetSets": 3,
+          "targetReps": "12-15 reps",
+          "setsRepsRaw": "3 series (12-15 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 90,
+          "restRaw": "90 segundos",
+          "benefit": "Aísla y define la parte frontal del muslo (cuádriceps).",
+          "tip": "Realiza una pequeña pausa de contracción máxima de 1 segundo arriba en cada repetición."
+        },
+        {
+          "id": "g3-2-piernas-curl-femoral-acostado-o-sentado",
+          "order": 2,
+          "muscleGroupRaw": "PIERNAS",
+          "name": "Curl femoral acostado o sentado",
+          "targetSets": 4,
+          "targetReps": "10-15 reps",
+          "setsRepsRaw": "4 series (10-15 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 90,
+          "restRaw": "90 segundos",
+          "benefit": "Fortalece los isquiotibiales y previene lesiones de rodilla.",
+          "tip": "Evita elevar los glúteos del banco al doblar las piernas; mantén la cadera pegada."
+        },
+        {
+          "id": "g3-3-piernas-peso-muerto-rumano-con-mancuernas-barra",
+          "order": 3,
+          "muscleGroupRaw": "PIERNAS",
+          "name": "Peso muerto rumano con mancuernas/barra",
+          "targetSets": 3,
+          "targetReps": "8-12 reps",
+          "setsRepsRaw": "3 series (8-12 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 120,
+          "restRaw": "2 minutos",
+          "benefit": "Desarrolla isquiotibiales y glúteos con énfasis en la cadena posterior.",
+          "tip": "Mantén la espalda totalmente recta y lleva la cadera hacia atrás sintiendo el estiramiento."
+        },
+        {
+          "id": "g3-4-piernas-elevacion-de-talones-para-pantorrillas",
+          "order": 4,
+          "muscleGroupRaw": "PIERNAS",
+          "name": "Elevación de talones para pantorrillas",
+          "targetSets": 4,
+          "targetReps": "15-20 reps",
+          "setsRepsRaw": "4 series (15-20 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 60,
+          "restRaw": "60 segundos",
+          "benefit": "Hipertrofia los músculos de la pantorrilla (gemelos y sóleo).",
+          "tip": "Haz una pausa abajo para eliminar el rebote y estirar bien, y sube con máxima potencia."
+        },
+        {
+          "id": "g3-5-abdominales-crunch-abdominal-en-maquina-o-suelo",
+          "order": 5,
+          "muscleGroupRaw": "ABDOMINALES",
+          "name": "Crunch abdominal en máquina o suelo",
+          "targetSets": 3,
+          "targetReps": "15-20 reps",
+          "setsRepsRaw": "3 series (15-20 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 60,
+          "restRaw": "60 segundos",
+          "benefit": null,
+          "tip": null
+        },
+        {
+          "id": "g3-6-abdominales-elevacion-de-piernas-colgado",
+          "order": 6,
+          "muscleGroupRaw": "ABDOMINALES",
+          "name": "Elevación de piernas colgado",
+          "targetSets": 3,
+          "targetReps": "12-15 reps",
+          "setsRepsRaw": "3 series (12-15 reps)",
+          "targetWeightByWeek": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "restSeconds": 60,
+          "restRaw": "60 segundos",
+          "benefit": "Hipertrofia los músculos de la pantorrilla (gemelos y sóleo).",
+          "tip": "Haz una pausa abajo para eliminar el rebote y estirar bien, y sube con máxima potencia."
+        }
+      ]
+    }
+  ]
+}
