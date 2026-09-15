@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ChevronRight, Clock3, Copy, Plus } from 'lucide-react'
+import { ChevronRight, Clock3, Copy, Minus, Plus } from 'lucide-react'
 import type { Exercise, ExerciseSet, PlanExercise } from '@/types'
 import { ExerciseImage } from '@/components/exercises/ExerciseImage'
 import { SetRow } from './SetRow'
@@ -18,6 +18,7 @@ interface ExerciseSessionCardProps {
   onUpdateSet: (setId: string, patch: Partial<Pick<ExerciseSet, 'actualReps' | 'weight' | 'rpe' | 'durationSeconds' | 'distanceMeters' | 'note'>>) => void
   onResetSet: (setId: string) => void
   onAddSet: () => void
+  onRemoveSet: () => void
   onDuplicateLastWeight: () => void
   onExerciseUpdated?: (exercise: Exercise) => void
 }
@@ -31,6 +32,7 @@ export function ExerciseSessionCard({
   onUpdateSet,
   onResetSet,
   onAddSet,
+  onRemoveSet,
   onDuplicateLastWeight,
   onExerciseUpdated,
 }: ExerciseSessionCardProps) {
@@ -91,6 +93,17 @@ export function ExerciseSessionCard({
         <button type="button" onClick={onAddSet} className="icon-button" style={{ display: 'flex', gap: 5, alignItems: 'center', fontSize: 11, border: '1px solid var(--border)', borderRadius: 8, padding: '6px 10px' }}>
           <Plus size={14} /> Serie
         </button>
+        {sets.length > 1 && (
+          <button
+            type="button"
+            onClick={onRemoveSet}
+            aria-label={`Quitar la última serie de ${exercise.name}`}
+            className="icon-button"
+            style={{ display: 'flex', gap: 5, alignItems: 'center', fontSize: 11, border: '1px solid var(--border)', borderRadius: 8, padding: '6px 10px' }}
+          >
+            <Minus size={14} /> Serie
+          </button>
+        )}
         {exercise.trackingMode === 'reps' && (
           <button type="button" onClick={onDuplicateLastWeight} className="icon-button" style={{ display: 'flex', gap: 5, alignItems: 'center', fontSize: 11, border: '1px solid var(--border)', borderRadius: 8, padding: '6px 10px' }}>
             <Copy size={14} /> Duplicar último peso

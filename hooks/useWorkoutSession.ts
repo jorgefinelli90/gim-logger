@@ -1,14 +1,15 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { Exercise, ExerciseSet, PlanDayId, Profile, SessionType, WeightUnit, WorkoutPlan, WorkoutSession } from '@/types'
 import { getOrCreateSessionForDate, updateSession } from '@/lib/storage/repositories/session-repo'
-import { getSetsBySession, createSet, updateSet as updateSetRepo, getSetsByExercise, seedSetsForSession } from '@/lib/storage/repositories/set-repo'
+import { getSetsBySession, createSet, updateSet as updateSetRepo, deleteSet, getSetsByExercise, seedSetsForSession } from '@/lib/storage/repositories/set-repo'
 import { getPlan } from '@/lib/storage/repositories/plan-repo'
 import { listExercises } from '@/lib/storage/repositories/exercise-repo'
 import { maybeUpdateRecord } from '@/lib/storage/repositories/record-repo'
 import { nowIso } from '@/lib/storage/ids'
 import { useSyncRefresh } from '@/lib/sync/notify'
+import { useSync } from '@/components/sync/SyncProvider'
 
 function planIdFromType(type: SessionType): PlanDayId | null {
   return type === 'descanso' ? null : (type as PlanDayId)
@@ -30,6 +31,7 @@ interface Actions {
   updateSetFields: (setId: string, patch: Partial<Pick<ExerciseSet, 'actualReps' | 'weight' | 'rpe' | 'durationSeconds' | 'distanceMeters' | 'note' | 'unit'>>) => Promise<void>
   duplicateLastWeight: (exerciseId: string) => Promise<void>
   addExtraSet: (exerciseId: string) => Promise<void>
+  removeLastSet: (exerciseId: string) => Promise<void>
   resetSet: (setId: string) => Promise<void>
   refresh: () => Promise<void>
 }
@@ -47,8 +49,19 @@ export function useWorkoutSession(profile: Profile, date: string, type: SessionT
     progress: { completed: 0, total: 0, percent: 0 },
   })
 
+  // Distingue la corrida MÁS RECIENTE de `load()` de cualquier otra que haya
+  // quedado en vuelo. `useSyncRefresh` puede disparar una corrida nueva
+  // mientras la anterior todavía está armando las series (scaffold) — sin
+  // esto, la que responde último "gana" aunque haya arrancado antes, y podría
+  // pisar el estado con datos viejos. Los ids determinísticos de las series
+  // (ver `set-repo.ts`) ya evitan que eso duplique filas; esto además evita
+  // que se vea un parpadeo hacia atrás en pantalla.
+  const loadTokenRef = useRef(0)
+  const { initialSyncDone } = useSync()
+
   const load = useCallback(async () => {
     if (!storageReady) return
+    const token = ++loadTokenRef.current
     setState((s) => ({ ...s, loading: true, error: null }))
     try {
       const planId = planIdFromType(type)
@@ -70,7 +83,15 @@ export function useWorkoutSession(profile: Profile, date: string, type: SessionT
       const exerciseMap = Object.fromEntries(allExercises.map((e) => [e.id, e]))
 
       let sets = await getSetsBySession(session.id)
-      if (plan) {
+      // Esperar la primera bajada antes de armar lo que "falta": un
+      // dispositivo recién entrado todavía no sabe si faltan de verdad o si
+      // alguien ya las sacó desde otro aparato — armarlas antes de tiempo
+      // resucitaría ese borrado en cuanto este dispositivo suba lo suyo. Ver
+      // `initialSyncDone` en SyncProvider. Mientras tanto se muestra lo que ya
+      // haya localmente (puede ser nada, un instante) y `useSyncRefresh` +
+      // este mismo cambio de bandera vuelven a llamar `load()` en cuanto esté
+      // lista la bajada.
+      if (plan && initialSyncDone) {
         // Scaffold per plan-exercise, not all-or-nothing: an exercise added to
         // the plan mid-session needs its set rows created too.
         const alreadyScaffolded = new Set(sets.map((s) => s.exerciseId))
@@ -107,6 +128,8 @@ export function useWorkoutSession(profile: Profile, date: string, type: SessionT
 
       const completed = sets.filter((s) => s.completed).length
       const total = sets.length
+      // Si mientras tanto arrancó otra corrida más nueva, esta ya no cuenta.
+      if (loadTokenRef.current !== token) return
       setState({
         loading: false,
         error: null,
@@ -118,9 +141,10 @@ export function useWorkoutSession(profile: Profile, date: string, type: SessionT
         progress: { completed, total, percent: total === 0 ? 0 : Math.round((completed / total) * 100) },
       })
     } catch (err) {
+      if (loadTokenRef.current !== token) return
       setState((s) => ({ ...s, loading: false, error: err instanceof Error ? err.message : 'Error al cargar la sesión.' }))
     }
-  }, [profile, date, type, storageReady, defaultUnit])
+  }, [profile, date, type, storageReady, defaultUnit, initialSyncDone])
 
   useEffect(() => {
     load()
@@ -259,6 +283,25 @@ export function useWorkoutSession(profile: Profile, date: string, type: SessionT
     [state.session, state.setsByExercise, profile, defaultUnit],
   )
 
+  const removeLastSet = useCallback(
+    async (exerciseId: string) => {
+      const current = state.setsByExercise[exerciseId] ?? []
+      // Nunca deja el ejercicio en cero series: para eso ya existe ocultarlo
+      // desde la rutina. "− Serie" es para ajustar la cantidad, no para vaciarlo.
+      if (current.length <= 1) return
+      const last = current[current.length - 1]
+      await deleteSet(last.id)
+      setState((s) => {
+        const sets = s.sets.filter((x) => x.id !== last.id)
+        const setsByExercise = { ...s.setsByExercise, [exerciseId]: (s.setsByExercise[exerciseId] ?? []).filter((x) => x.id !== last.id) }
+        const completed = sets.filter((x) => x.completed).length
+        const total = sets.length
+        return { ...s, sets, setsByExercise, progress: { completed, total, percent: total === 0 ? 0 : Math.round((completed / total) * 100) } }
+      })
+    },
+    [state.setsByExercise],
+  )
+
   const resetSet = useCallback(
     async (setId: string) => {
       await applySetPatch(setId, { completed: false, completedAt: null, actualReps: null, weight: null, rpe: null, durationSeconds: null, distanceMeters: null, note: null })
@@ -267,7 +310,7 @@ export function useWorkoutSession(profile: Profile, date: string, type: SessionT
   )
 
   return useMemo(
-    () => ({ ...state, toggleSet, updateSetFields, duplicateLastWeight, addExtraSet, resetSet, refresh: load }),
-    [state, toggleSet, updateSetFields, duplicateLastWeight, addExtraSet, resetSet, load],
+    () => ({ ...state, toggleSet, updateSetFields, duplicateLastWeight, addExtraSet, removeLastSet, resetSet, refresh: load }),
+    [state, toggleSet, updateSetFields, duplicateLastWeight, addExtraSet, removeLastSet, resetSet, load],
   )
 }

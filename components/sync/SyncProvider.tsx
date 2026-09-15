@@ -31,6 +31,19 @@ interface SyncContextValue {
   lastSyncAt: string | null
   pending: number
   error: string | null
+  /**
+   * Se pone en `true` recién cuando termina el PRIMER intento de sincronizar
+   * de esta sesión (o de entrada, si no hay sincronización configurada).
+   *
+   * Por qué importa: un dispositivo nuevo arranca con IndexedDB vacío. Si algo
+   * como `useWorkoutSession` arma las series de un ejercicio ANTES de que el
+   * dispositivo baje lo que ya existe en el servidor, no tiene forma de saber
+   * que una de esas series fue borrada a propósito desde otro aparato — la
+   * recrea igual, y al subir esa creación "resucita" el borrado ajeno. Cualquier
+   * lugar que decida crear datos a partir de "lo que falta localmente" tiene
+   * que esperar a que esto sea `true` antes de decidir qué falta de verdad.
+   */
+  initialSyncDone: boolean
   /** Login con usuario + contraseña contra una de las cuentas fijas. */
   signIn: (username: string, password: string) => Promise<{ ok: boolean; message: string }>
   signOut: () => Promise<void>
@@ -53,6 +66,7 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
   const [lastSyncAt, setLastSyncAt] = useState<string | null>(null)
   const [pending, setPending] = useState(0)
   const [error, setError] = useState<string | null>(null)
+  const [initialSyncDone, setInitialSyncDone] = useState(!configured)
 
   const lastPullRef = useRef(0)
   const syncRef = useRef<(force: boolean) => void>(() => {})
@@ -99,6 +113,9 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
 
     let cancelled = false
     let inFlight = false
+    // Nueva cuenta/dispositivo entrando: hay que volver a esperar la primera
+    // bajada antes de dejar que algo arme datos "de lo que falta localmente".
+    setInitialSyncDone(false)
 
     const refreshPending = async () => {
       const count = await countPending()
@@ -110,7 +127,13 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
       void (async () => {
         const queued = await countPending()
         const stale = Date.now() - lastPullRef.current > PULL_EVERY_MS
-        if (!force && queued === 0 && !stale) return
+        if (!force && queued === 0 && !stale) {
+          // No había nada que hacer, pero igual cuenta como "ya se intentó":
+          // si esta era la primera pasada, no hay que dejar todo esperando
+          // por un pull que nunca se va a disparar.
+          setInitialSyncDone(true)
+          return
+        }
 
         inFlight = true
         if (!cancelled) setStatus('syncing')
@@ -133,6 +156,10 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
           }
         } finally {
           inFlight = false
+          // Se marca pase lo que pase (incluso si falló): sin red, esperar
+          // para siempre a una bajada que no va a llegar sería peor que
+          // arrancar con lo que ya hay en el dispositivo.
+          if (!cancelled) setInitialSyncDone(true)
           void refreshPending()
         }
       })()
@@ -201,11 +228,12 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
       lastSyncAt,
       pending,
       error,
+      initialSyncDone,
       signIn,
       signOut,
       sync,
     }),
-    [status, session, lastSyncAt, pending, error, signIn, signOut, sync],
+    [status, session, lastSyncAt, pending, error, initialSyncDone, signIn, signOut, sync],
   )
 
   return <SyncContext.Provider value={value}>{children}</SyncContext.Provider>

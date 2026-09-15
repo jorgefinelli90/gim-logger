@@ -97,6 +97,7 @@ export function WorkoutSessionView({ profile, date, type, title, subtitle, typeB
                 onUpdateSet={session.updateSetFields}
                 onResetSet={session.resetSet}
                 onAddSet={() => session.addExtraSet(exerciseId)}
+                onRemoveSet={() => session.removeLastSet(exerciseId)}
                 onDuplicateLastWeight={() => session.duplicateLastWeight(exerciseId)}
                 onExerciseUpdated={(updated) => editExercise(updated.id, updated)}
               />

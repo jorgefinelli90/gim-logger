@@ -148,13 +148,27 @@ async function pushQueue(client: SupabaseClient, userId: string, queue: SyncQueu
     if (entries.length === 0) continue
 
     const spec = TABLE_SPECS[store]
-    const rows: Record<string, unknown>[] = []
+    // Lápidas y filas nuevas se mandan en llamadas SEPARADAS, nunca mezcladas
+    // en el mismo upsert. Motivo (encontrado de la manera difícil): el upsert
+    // masivo de PostgREST arma una única lista de columnas a partir de TODAS
+    // las filas del pedido; a una fila le falta una clave que otra sí trae
+    // (por ejemplo `unit` en una lápida de `sets`, que no la necesita) y esa
+    // columna le llega como NULL en vez de "usar su default" — si esa columna
+    // es NOT NULL, Postgres rechaza el pedido ENTERO con un 400, y como
+    // entonces nunca se limpia la cola, la serie/nota/lo que sea queda
+    // reintentando ese mismo error para siempre sin subir jamás. Separando
+    // las lápidas (que siempre comparten la misma forma entre sí) de las
+    // filas nuevas (que también comparten la misma forma entre sí) cada
+    // pedido queda con columnas consistentes, sin depender de mantener a mano
+    // una lista de columnas "por si las dudas" que se desactualiza en cuanto
+    // se agrega un campo nuevo a `toRow`.
+    const putRows: Record<string, unknown>[] = []
+    const deleteRows: Record<string, unknown>[] = []
     const done: { store: SyncableStore; key: string }[] = []
 
     for (const entry of entries) {
       if (entry.op === 'delete') {
-        // Lápida en vez de DELETE: el otro dispositivo necesita enterarse.
-        rows.push({ user_id: userId, id: entry.key, deleted_at: new Date().toISOString(), ...tombstoneDefaults(store, entry.key) })
+        deleteRows.push({ user_id: userId, id: entry.key, deleted_at: new Date().toISOString(), ...tombstoneDefaults(store, entry.key) })
         done.push({ store, key: entry.key })
         continue
       }
@@ -164,15 +178,17 @@ async function pushQueue(client: SupabaseClient, userId: string, queue: SyncQueu
         done.push({ store, key: entry.key })
         continue
       }
-      rows.push({ user_id: userId, deleted_at: null, ...(spec.toRow as (r: unknown) => Record<string, unknown>)(local) })
+      putRows.push({ user_id: userId, deleted_at: null, ...(spec.toRow as (r: unknown) => Record<string, unknown>)(local) })
       done.push({ store, key: entry.key })
     }
 
-    for (let i = 0; i < rows.length; i += PAGE_SIZE) {
-      const chunk = rows.slice(i, i + PAGE_SIZE)
-      const { error } = await client.from(spec.table).upsert(chunk, { onConflict: 'id' })
-      if (error) throw new SyncError(`No se pudo subir "${spec.table}": ${error.message}`, error)
-      pushed += chunk.length
+    for (const rows of [putRows, deleteRows]) {
+      for (let i = 0; i < rows.length; i += PAGE_SIZE) {
+        const chunk = rows.slice(i, i + PAGE_SIZE)
+        const { error } = await client.from(spec.table).upsert(chunk, { onConflict: 'id' })
+        if (error) throw new SyncError(`No se pudo subir "${spec.table}": ${error.message}`, error)
+        pushed += chunk.length
+      }
     }
 
     await clearSyncEntries(done)
