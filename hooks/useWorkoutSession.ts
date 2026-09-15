@@ -1,13 +1,14 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import type { Exercise, ExerciseSet, PlanDayId, SessionType, WeightUnit, WorkoutPlan, WorkoutSession } from '@/types'
+import type { Exercise, ExerciseSet, PlanDayId, Profile, SessionType, WeightUnit, WorkoutPlan, WorkoutSession } from '@/types'
 import { getOrCreateSessionForDate, updateSession } from '@/lib/storage/repositories/session-repo'
 import { getSetsBySession, createSet, updateSet as updateSetRepo, getSetsByExercise, seedSetsForSession } from '@/lib/storage/repositories/set-repo'
 import { getPlan } from '@/lib/storage/repositories/plan-repo'
 import { listExercises } from '@/lib/storage/repositories/exercise-repo'
 import { maybeUpdateRecord } from '@/lib/storage/repositories/record-repo'
 import { nowIso } from '@/lib/storage/ids'
+import { useSyncRefresh } from '@/lib/sync/notify'
 
 function planIdFromType(type: SessionType): PlanDayId | null {
   return type === 'descanso' ? null : (type as PlanDayId)
@@ -33,7 +34,8 @@ interface Actions {
   refresh: () => Promise<void>
 }
 
-export function useWorkoutSession(date: string, type: SessionType, storageReady: boolean, defaultUnit: WeightUnit): WorkoutSessionState & Actions {
+export function useWorkoutSession(profile: Profile, date: string, type: SessionType, storageReady: boolean, defaultUnit: WeightUnit): WorkoutSessionState & Actions {
+  // Recarga la sesión cuando llegan series registradas desde otro dispositivo.
   const [state, setState] = useState<WorkoutSessionState>({
     loading: true,
     error: null,
@@ -50,9 +52,21 @@ export function useWorkoutSession(date: string, type: SessionType, storageReady:
     setState((s) => ({ ...s, loading: true, error: null }))
     try {
       const planId = planIdFromType(type)
-      const session = await getOrCreateSessionForDate(date, { date, type, status: 'pendiente', startedAt: null, completedAt: null })
-      const plan = planId ? (await getPlan(planId)) ?? null : null
-      const allExercises = await listExercises()
+      const session = await getOrCreateSessionForDate(date, {
+        profile,
+        date,
+        type,
+        status: 'pendiente',
+        // No se marca primaria acá: crear/abrir una sesión (incluido "recuperar"
+        // un día puntual desde /rutinas) no debe pisar el día que el dashboard
+        // está mostrando como "el de hoy". Eso solo lo cambia una acción
+        // explícita — ver `useEffectiveSessionType`.
+        isPrimaryForDate: false,
+        startedAt: null,
+        completedAt: null,
+      })
+      const plan = planId ? (await getPlan(profile, planId)) ?? null : null
+      const allExercises = await listExercises(profile)
       const exerciseMap = Object.fromEntries(allExercises.map((e) => [e.id, e]))
 
       let sets = await getSetsBySession(session.id)
@@ -64,6 +78,7 @@ export function useWorkoutSession(date: string, type: SessionType, storageReady:
           .filter((pe) => !alreadyScaffolded.has(pe.exerciseId))
           .flatMap((pe) =>
             Array.from({ length: pe.targetSets }, (_, i) => ({
+              profile,
               sessionId: session.id,
               exerciseId: pe.exerciseId,
               setIndex: i,
@@ -105,11 +120,13 @@ export function useWorkoutSession(date: string, type: SessionType, storageReady:
     } catch (err) {
       setState((s) => ({ ...s, loading: false, error: err instanceof Error ? err.message : 'Error al cargar la sesión.' }))
     }
-  }, [date, type, storageReady, defaultUnit])
+  }, [profile, date, type, storageReady, defaultUnit])
 
   useEffect(() => {
     load()
   }, [load])
+
+  useSyncRefresh(load)
 
   const applySetPatch = useCallback(
     async (setId: string, patch: Partial<ExerciseSet>) => {
@@ -138,6 +155,7 @@ export function useWorkoutSession(date: string, type: SessionType, storageReady:
       if (willComplete && state.session) {
         if (updated.weight != null) {
           await maybeUpdateRecord({
+            profile,
             exerciseId: updated.exerciseId,
             type: 'max-weight',
             value: updated.weight,
@@ -149,6 +167,7 @@ export function useWorkoutSession(date: string, type: SessionType, storageReady:
         }
         if (updated.actualReps != null) {
           await maybeUpdateRecord({
+            profile,
             exerciseId: updated.exerciseId,
             type: 'max-reps',
             value: updated.actualReps,
@@ -160,6 +179,7 @@ export function useWorkoutSession(date: string, type: SessionType, storageReady:
         }
         if (updated.weight != null && updated.actualReps != null) {
           await maybeUpdateRecord({
+            profile,
             exerciseId: updated.exerciseId,
             type: 'max-volume',
             value: updated.weight * updated.actualReps,
@@ -171,6 +191,7 @@ export function useWorkoutSession(date: string, type: SessionType, storageReady:
         }
         if (updated.durationSeconds != null) {
           await maybeUpdateRecord({
+            profile,
             exerciseId: updated.exerciseId,
             type: 'best-time',
             value: updated.durationSeconds,
@@ -186,7 +207,7 @@ export function useWorkoutSession(date: string, type: SessionType, storageReady:
         }
       }
     },
-    [state.sets, state.session, applySetPatch, date],
+    [state.sets, state.session, applySetPatch, profile, date],
   )
 
   const updateSetFields = useCallback(
@@ -214,6 +235,7 @@ export function useWorkoutSession(date: string, type: SessionType, storageReady:
       if (!state.session) return
       const current = state.setsByExercise[exerciseId] ?? []
       const created = await createSet({
+        profile,
         sessionId: state.session.id,
         exerciseId,
         setIndex: current.length,
@@ -234,7 +256,7 @@ export function useWorkoutSession(date: string, type: SessionType, storageReady:
         return { ...s, sets, setsByExercise, progress: { ...s.progress, total: s.progress.total + 1 } }
       })
     },
-    [state.session, state.setsByExercise, defaultUnit],
+    [state.session, state.setsByExercise, profile, defaultUnit],
   )
 
   const resetSet = useCallback(

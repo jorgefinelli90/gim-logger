@@ -5,14 +5,19 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { WeekCalendar } from '@/components/calendar/WeekCalendar'
 import { usePreferences } from '@/hooks/usePreferences'
-import { addDays, formatLongDate, getWeekDates, sessionTypeForDate, todayIso } from '@/lib/date/date-utils'
+import { useStorageReady } from '@/hooks/useStorageReady'
+import { useEffectiveSessionType } from '@/hooks/useEffectiveSessionType'
+import { useActiveProfile } from '@/lib/profile/ProfileContext'
+import { addDays, formatLongDate, getWeekDates, todayIso } from '@/lib/date/date-utils'
 import { PLAN_META, DEFAULT_PLAN_META } from '@/components/workout/plan-meta'
 
 export default function CalendarioPage() {
+  const { profile } = useActiveProfile()
+  const { ready } = useStorageReady()
   const { preferences } = usePreferences()
   const [selectedDate, setSelectedDate] = useState(todayIso())
   const weekDates = getWeekDates(selectedDate, preferences.firstDayOfWeek)
-  const type = sessionTypeForDate(selectedDate)
+  const { type } = useEffectiveSessionType(profile, selectedDate, ready)
   const meta = PLAN_META[type] ?? DEFAULT_PLAN_META
 
   return (
@@ -28,6 +33,7 @@ export default function CalendarioPage() {
 
       <div style={{ marginTop: 28, maxWidth: 720 }}>
         <WeekCalendar
+          profile={profile}
           weekDates={weekDates}
           selectedDate={selectedDate}
           onSelectDate={setSelectedDate}

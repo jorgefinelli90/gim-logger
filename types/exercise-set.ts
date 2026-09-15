@@ -1,7 +1,10 @@
+import type { Profile } from './profile'
+
 export type WeightUnit = 'kg' | 'lb'
 
 export interface ExerciseSet {
   id: string
+  profile: Profile
   sessionId: string
   exerciseId: string
   setIndex: number

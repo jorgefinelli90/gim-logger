@@ -4,7 +4,8 @@ import { useMemo, useState } from 'react'
 import { EyeOff, ListChecks, Plus, Search } from 'lucide-react'
 import { useStorageReady } from '@/hooks/useStorageReady'
 import { useExercises } from '@/hooks/useExercises'
-import type { Exercise, ExerciseCategory, MuscleGroup } from '@/types'
+import { useActiveProfile } from '@/lib/profile/ProfileContext'
+import type { Exercise, ExerciseCategory, MuscleGroup, Profile } from '@/types'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -15,30 +16,34 @@ import { EmptyState } from '@/components/common/EmptyState'
 import { MUSCLE_LABELS, CATEGORY_LABELS } from '@/components/exercises/labels'
 import { searchExercises } from '@/lib/exercise-matching/match'
 
-const BLANK_EXERCISE: Exercise = {
-  id: '',
-  name: '',
-  aliases: [],
-  muscleGroup: 'cuerpo-completo',
-  secondaryMuscles: [],
-  category: 'gimnasio',
-  trackingMode: 'reps',
-  equipment: [],
-  instructions: [],
-  commonMistakes: [],
-  alternatives: [],
-  image: { gifUrl: null, customUrl: null, sourceSlug: null },
-  hidden: false,
-  isCustom: true,
-  source: 'custom',
-  order: 0,
-  createdAt: '',
-  updatedAt: '',
+function blankExercise(profile: Profile): Exercise {
+  return {
+    id: '',
+    profile,
+    name: '',
+    aliases: [],
+    muscleGroup: 'cuerpo-completo',
+    secondaryMuscles: [],
+    category: 'gimnasio',
+    trackingMode: 'reps',
+    equipment: [],
+    instructions: [],
+    commonMistakes: [],
+    alternatives: [],
+    image: { gifUrl: null, customUrl: null, sourceSlug: null },
+    hidden: false,
+    isCustom: true,
+    source: 'custom',
+    order: 0,
+    createdAt: '',
+    updatedAt: '',
+  }
 }
 
 export default function EjerciciosPage() {
   const { ready } = useStorageReady()
-  const { exercises, add, edit } = useExercises(ready)
+  const { profile } = useActiveProfile()
+  const { exercises, add, edit } = useExercises(profile, ready)
   const [query, setQuery] = useState('')
   const [muscle, setMuscle] = useState<MuscleGroup | 'todos'>('todos')
   const [category, setCategory] = useState<ExerciseCategory | 'todos'>('todos')
@@ -61,7 +66,7 @@ export default function EjerciciosPage() {
     if (editing && editing.id) {
       await edit(editing.id, patch)
     } else {
-      const { id: _id, createdAt: _c, updatedAt: _u, ...input } = { ...BLANK_EXERCISE, ...patch }
+      const { id: _id, createdAt: _c, updatedAt: _u, ...input } = { ...blankExercise(profile), ...patch }
       await add(input)
     }
   }
@@ -77,7 +82,7 @@ export default function EjerciciosPage() {
         </div>
         <Button
           onClick={() => {
-            setEditing(BLANK_EXERCISE)
+            setEditing(blankExercise(profile))
             setSheetOpen(true)
           }}
         >

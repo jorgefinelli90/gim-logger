@@ -1,4 +1,5 @@
 import { BarChart3, Calendar, Dumbbell, History, ListChecks, PersonStanding, Settings2, Target } from 'lucide-react'
+import type { Profile } from '@/types'
 
 export interface NavItem {
   href: string
@@ -6,12 +7,19 @@ export interface NavItem {
   icon: typeof Target
 }
 
-export const PRIMARY_NAV: NavItem[] = [
-  { href: '/', label: 'Hoy', icon: Target },
-  { href: '/calendario', label: 'Calendario', icon: Calendar },
-  { href: '/rutinas', label: 'Rutinas', icon: Dumbbell },
-  { href: '/calistenia', label: 'Calistenia', icon: PersonStanding },
-]
+const CALISTENIA_ITEM: NavItem = { href: '/calistenia', label: 'Calistenia', icon: PersonStanding }
+
+/** Calistenia está disponible para los dos perfiles — para Jorge es un día
+ *  fijo del horario semanal, para Sebastián es una opción para sus días
+ *  libres (ver `lib/date/profile-schedule.ts`). */
+export function primaryNavForProfile(_profile: Profile): NavItem[] {
+  return [
+    { href: '/', label: 'Hoy', icon: Target },
+    { href: '/calendario', label: 'Calendario', icon: Calendar },
+    { href: '/rutinas', label: 'Rutinas', icon: Dumbbell },
+    CALISTENIA_ITEM,
+  ]
+}
 
 export const SECONDARY_NAV: NavItem[] = [
   { href: '/ejercicios', label: 'Ejercicios', icon: ListChecks },

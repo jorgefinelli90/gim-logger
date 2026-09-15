@@ -5,10 +5,12 @@ import { Tabs, TabsList, TabsPanel, TabsTab } from '@/components/ui/tabs'
 import { WorkoutSessionView } from '@/components/workout/WorkoutSessionView'
 import { CalisthenicsEditor } from '@/components/workout/CalisthenicsEditor'
 import { useStorageReady } from '@/hooks/useStorageReady'
+import { useActiveProfile } from '@/lib/profile/ProfileContext'
 import { todayIso } from '@/lib/date/date-utils'
 
 export default function CalisteniaPage() {
   const { ready } = useStorageReady()
+  const { profile } = useActiveProfile()
   const [tab, setTab] = useState('hoy')
 
   return (
@@ -28,10 +30,10 @@ export default function CalisteniaPage() {
           <TabsTab value="editar">Editar rutina</TabsTab>
         </TabsList>
         <TabsPanel value="hoy" className="mt-6">
-          <WorkoutSessionView date={todayIso()} type="calistenia" title="Calistenia" subtitle="Completa tus ejercicios del día" typeBadge={{ label: 'PESO CORPORAL', tone: 'lime' }} />
+          <WorkoutSessionView profile={profile} date={todayIso()} type="calistenia" title="Calistenia" subtitle="Completa tus ejercicios del día" typeBadge={{ label: 'PESO CORPORAL', tone: 'lime' }} />
         </TabsPanel>
         <TabsPanel value="editar" className="mt-6">
-          <CalisthenicsEditor storageReady={ready} />
+          <CalisthenicsEditor profile={profile} storageReady={ready} />
         </TabsPanel>
       </Tabs>
     </>

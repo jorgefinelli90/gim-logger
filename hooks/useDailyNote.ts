@@ -1,10 +1,12 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import type { DailyNote, DailyNoteInput } from '@/types'
+import type { DailyNote, DailyNoteInput, Profile } from '@/types'
 import { getNoteByDate, upsertNoteForDate } from '@/lib/storage/repositories/note-repo'
+import { useSyncVersion } from '@/lib/sync/notify'
 
-export function useDailyNote(date: string, storageReady: boolean) {
+export function useDailyNote(profile: Profile, date: string, storageReady: boolean) {
+  const syncVersion = useSyncVersion()
   const [note, setNote] = useState<DailyNote | null>(null)
   const [loading, setLoading] = useState(true)
   const saveTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -13,7 +15,7 @@ export function useDailyNote(date: string, storageReady: boolean) {
     if (!storageReady) return
     let cancelled = false
     setLoading(true)
-    getNoteByDate(date).then((result) => {
+    getNoteByDate(profile, date).then((result) => {
       if (!cancelled) {
         setNote(result ?? null)
         setLoading(false)
@@ -22,19 +24,19 @@ export function useDailyNote(date: string, storageReady: boolean) {
     return () => {
       cancelled = true
     }
-  }, [date, storageReady])
+  }, [profile, date, storageReady, syncVersion])
 
   /** Debounced autosave: updates local state immediately, persists after a short pause. */
   const save = useCallback(
     (patch: Partial<DailyNoteInput>) => {
-      setNote((prev) => (prev ? { ...prev, ...patch } : ({ ...patch, date } as DailyNote)))
+      setNote((prev) => (prev ? { ...prev, ...patch } : ({ ...patch, profile, date } as DailyNote)))
       if (saveTimeout.current) clearTimeout(saveTimeout.current)
       saveTimeout.current = setTimeout(async () => {
-        const saved = await upsertNoteForDate(date, patch)
+        const saved = await upsertNoteForDate(profile, date, patch)
         setNote(saved)
       }, 500)
     },
-    [date],
+    [profile, date],
   )
 
   return { note, loading, save }

@@ -22,32 +22,43 @@ import { clearAllStores } from '@/lib/storage/db'
 import { listExercises } from '@/lib/storage/repositories/exercise-repo'
 import { listSessions } from '@/lib/storage/repositories/session-repo'
 import { listAllSets } from '@/lib/storage/repositories/set-repo'
+import { useActiveProfile } from '@/lib/profile/ProfileContext'
+import { PROFILE_LABELS } from '@/types'
 
 export function ExportImportPanel() {
+  const { profile } = useActiveProfile()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [status, setStatus] = useState<string | null>(null)
   const [pendingImport, setPendingImport] = useState<BackupPayload | null>(null)
   const [confirmOpen, setConfirmOpen] = useState(false)
 
   async function handleExportJson() {
+    // El backup JSON es del dispositivo entero (los dos perfiles): sirve para
+    // restaurar todo, no para leerlo persona por persona.
     const backup = await buildBackup()
     downloadTextFile(`iron-log-backup-${backup.exportedAt.slice(0, 10)}.json`, JSON.stringify(backup, null, 2), 'application/json')
     setStatus('Datos exportados como JSON.')
   }
 
   async function handleExportCsv() {
-    const [exercises, sessions, sets] = await Promise.all([listExercises(), listSessions(), listAllSets()])
+    // El CSV y el resumen semanal sí son por perfil: mezclar el historial de
+    // Jorge y Sebastián en una sola planilla no tendría sentido para leerla.
+    const [exercises, sessions, sets] = await Promise.all([listExercises(profile), listSessions(), listAllSets()])
     const exerciseMap = Object.fromEntries(exercises.map((e) => [e.id, e]))
-    const csv = buildHistoryCsv(sets, sessions, exerciseMap)
-    downloadTextFile(`iron-log-historial-${new Date().toISOString().slice(0, 10)}.csv`, csv, 'text/csv')
-    setStatus('Historial exportado como CSV.')
+    const profileSessions = sessions.filter((s) => s.profile === profile)
+    const profileSets = sets.filter((s) => s.profile === profile)
+    const csv = buildHistoryCsv(profileSets, profileSessions, exerciseMap)
+    downloadTextFile(`iron-log-historial-${PROFILE_LABELS[profile].toLowerCase()}-${new Date().toISOString().slice(0, 10)}.csv`, csv, 'text/csv')
+    setStatus(`Historial de ${PROFILE_LABELS[profile]} exportado como CSV.`)
   }
 
   async function handleWeeklySummary() {
-    const [exercises, sessions, sets] = await Promise.all([listExercises(), listSessions(), listAllSets()])
+    const [exercises, sessions, sets] = await Promise.all([listExercises(profile), listSessions(), listAllSets()])
     const exerciseMap = Object.fromEntries(exercises.map((e) => [e.id, e]))
-    const summary = buildWeeklySummary(sessions, sets, exerciseMap)
-    downloadTextFile(`iron-log-resumen-semanal-${new Date().toISOString().slice(0, 10)}.txt`, summary, 'text/plain')
+    const profileSessions = sessions.filter((s) => s.profile === profile)
+    const profileSets = sets.filter((s) => s.profile === profile)
+    const summary = buildWeeklySummary(profileSessions, profileSets, exerciseMap)
+    downloadTextFile(`iron-log-resumen-semanal-${PROFILE_LABELS[profile].toLowerCase()}-${new Date().toISOString().slice(0, 10)}.txt`, summary, 'text/plain')
     setStatus('Resumen semanal descargado.')
   }
 

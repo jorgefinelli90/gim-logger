@@ -1,11 +1,13 @@
 'use client'
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import type { Profile } from '@/types'
 import { useStorageReady } from '@/hooks/useStorageReady'
 import { useWeekOverview } from '@/hooks/useWeekOverview'
 import { formatDayMonth, sessionTypeLabel, todayIso, weekdayShortLabel } from '@/lib/date/date-utils'
 
 interface WeekCalendarProps {
+  profile: Profile
   weekDates: string[]
   selectedDate: string
   onSelectDate: (date: string) => void
@@ -18,12 +20,13 @@ const TYPE_COLOR: Record<string, string> = {
   'gimnasio-dia-1': 'var(--orange)',
   'gimnasio-dia-2': 'var(--orange)',
   'gimnasio-dia-3': 'var(--orange)',
+  'gimnasio-dia-4': 'var(--orange)',
   descanso: 'var(--muted)',
 }
 
-export function WeekCalendar({ weekDates, selectedDate, onSelectDate, onPrevWeek, onNextWeek }: WeekCalendarProps) {
+export function WeekCalendar({ profile, weekDates, selectedDate, onSelectDate, onPrevWeek, onNextWeek }: WeekCalendarProps) {
   const { ready } = useStorageReady()
-  const { overview, loading } = useWeekOverview(weekDates, ready)
+  const { overview, loading } = useWeekOverview(profile, weekDates, ready)
   const today = todayIso()
 
   return (

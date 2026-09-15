@@ -3,12 +3,13 @@ import { computeMuscleDistribution, computeStreaks, computeTotals } from './aggr
 import type { Exercise, ExerciseSet, WorkoutSession } from '@/types'
 
 function session(id: string, date: string, type: WorkoutSession['type']): WorkoutSession {
-  return { id, date, type, status: 'completo', startedAt: null, completedAt: null, createdAt: date, updatedAt: date }
+  return { id, profile: 'jorge', date, type, status: 'completo', isPrimaryForDate: true, startedAt: null, completedAt: null, createdAt: date, updatedAt: date }
 }
 
 function completedSet(id: string, sessionId: string, exerciseId: string, weight: number | null, reps: number | null): ExerciseSet {
   return {
     id,
+    profile: 'jorge',
     sessionId,
     exerciseId,
     setIndex: 0,
@@ -40,7 +41,7 @@ describe('computeStreaks', () => {
       completedSet('b', 's2', 'ex1', 20, 10),
       completedSet('c', 's3', 'ex1', null, 10),
     ]
-    const result = computeStreaks(sessions, sets, '2026-09-16')
+    const result = computeStreaks('jorge', sessions, sets, '2026-09-16')
     expect(result.current).toBe(3)
   })
 
@@ -48,13 +49,13 @@ describe('computeStreaks', () => {
     const sessions: WorkoutSession[] = [session('s1', '2026-09-14', 'calistenia')]
     const sets = [completedSet('a', 's1', 'ex1', null, 10)]
     // 2026-09-16 (Wednesday) was a training day with no completed session.
-    const result = computeStreaks(sessions, sets, '2026-09-16')
+    const result = computeStreaks('jorge', sessions, sets, '2026-09-16')
     expect(result.current).toBe(0)
   })
 
   it('ignores sessions with no completed sets', () => {
     const sessions: WorkoutSession[] = [session('s1', '2026-09-14', 'calistenia')]
-    const result = computeStreaks(sessions, [], '2026-09-14')
+    const result = computeStreaks('jorge', sessions, [], '2026-09-14')
     expect(result.current).toBe(0)
   })
 })

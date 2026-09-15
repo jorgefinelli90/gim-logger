@@ -6,8 +6,13 @@ import { Search } from 'lucide-react'
 import { DateNavigator } from '@/components/dashboard/DateNavigator'
 import { ReminderBanner } from '@/components/dashboard/ReminderBanner'
 import { WorkoutSessionView } from '@/components/workout/WorkoutSessionView'
-import { todayIso, sessionTypeForDate, weekdayLabel } from '@/lib/date/date-utils'
+import { RoutineSwapControl } from '@/components/workout/RoutineSwapControl'
+import { todayIso, weekdayLabel } from '@/lib/date/date-utils'
 import { PLAN_META, DEFAULT_PLAN_META } from '@/components/workout/plan-meta'
+import { useActiveProfile } from '@/lib/profile/ProfileContext'
+import { useStorageReady } from '@/hooks/useStorageReady'
+import { useEffectiveSessionType } from '@/hooks/useEffectiveSessionType'
+import { PROFILE_LABELS } from '@/types'
 
 const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/
 
@@ -23,7 +28,9 @@ function DashboardContent() {
   const searchParams = useSearchParams()
   const dateParam = searchParams.get('date')
   const [date, setDate] = useState(dateParam && ISO_DATE_RE.test(dateParam) ? dateParam : todayIso())
-  const type = sessionTypeForDate(date)
+  const { profile } = useActiveProfile()
+  const { ready } = useStorageReady()
+  const { type, isDefault, changeType } = useEffectiveSessionType(profile, date, ready)
   const meta = PLAN_META[type] ?? DEFAULT_PLAN_META
 
   return (
@@ -37,13 +44,14 @@ function DashboardContent() {
             Tu semana, <em>en movimiento.</em>
           </h1>
           <DateNavigator date={date} onChange={setDate} />
+          <RoutineSwapControl profile={profile} type={type} isDefault={isDefault} onChange={changeType} />
         </div>
         <div className="header-actions">
           <button className="icon-button" aria-label="Buscar ejercicio">
             <Search />
           </button>
           <div className="avatar" aria-hidden>
-            J
+            {PROFILE_LABELS[profile][0]}
           </div>
         </div>
       </header>
@@ -51,7 +59,7 @@ function DashboardContent() {
       <ReminderBanner date={date} type={type} />
 
       <div style={{ marginTop: 32 }}>
-        <WorkoutSessionView date={date} type={type} title={meta.title} subtitle={meta.subtitle} typeBadge={meta.badge} />
+        <WorkoutSessionView profile={profile} date={date} type={type} title={meta.title} subtitle={meta.subtitle} typeBadge={meta.badge} />
       </div>
 
       <footer className="footer">

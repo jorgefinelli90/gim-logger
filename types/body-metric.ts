@@ -1,5 +1,8 @@
+import type { Profile } from './profile'
+
 export interface BodyMetric {
   id: string
+  profile: Profile
   /** ISO date (yyyy-mm-dd). */
   date: string
   weight: number | null

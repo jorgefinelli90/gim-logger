@@ -5,6 +5,8 @@ import { Clock3, Dumbbell, Flame, Layers, ListOrdered, Repeat2, TrendingUp, Trop
 import { useStorageReady } from '@/hooks/useStorageReady'
 import { useStatistics } from '@/hooks/useStatistics'
 import { usePreferences } from '@/hooks/usePreferences'
+import { useActiveProfile } from '@/lib/profile/ProfileContext'
+import { trainingDaysPerWeek } from '@/lib/date/profile-schedule'
 import { StatTile } from '@/components/statistics/StatTile'
 import { MuscleDistributionChart } from '@/components/statistics/MuscleDistributionChart'
 import { WeightProgressChart } from '@/components/statistics/WeightProgressChart'
@@ -12,7 +14,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 export default function EstadisticasPage() {
   const { ready } = useStorageReady()
-  const stats = useStatistics(ready)
+  const { profile } = useActiveProfile()
+  const stats = useStatistics(profile, ready)
   const { preferences } = usePreferences()
   const exerciseList = Object.values(stats.exercises)
     .filter((e) => e.trackingMode === 'reps')
@@ -43,7 +46,7 @@ export default function EstadisticasPage() {
         <StatTile icon={ListOrdered} label="Series totales" value={stats.totals.totalSets} />
         <StatTile icon={Repeat2} label="Repeticiones" value={stats.totals.totalReps} />
         <StatTile icon={Clock3} label="Tiempo entrenado" value={stats.totalTrainingMinutes > 0 ? `${hours}h ${minutes}m` : '—'} />
-        <StatTile icon={TrendingUp} label="Esta semana" value={`${stats.weeklyCount}/6`} hint="días de rutina" />
+        <StatTile icon={TrendingUp} label="Esta semana" value={`${stats.weeklyCount}/${trainingDaysPerWeek(profile)}`} hint="días de rutina" />
       </div>
 
       <section style={{ marginTop: 36, maxWidth: 640 }}>

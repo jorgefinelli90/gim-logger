@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import type { SessionType } from '@/types'
+import type { Profile, SessionType } from '@/types'
 import { useStorageReady } from '@/hooks/useStorageReady'
 import { usePreferences } from '@/hooks/usePreferences'
 import { useWorkoutSession } from '@/hooks/useWorkoutSession'
@@ -16,6 +16,7 @@ import { sessionTypeLabel } from '@/lib/date/date-utils'
 import { Dumbbell } from 'lucide-react'
 
 interface WorkoutSessionViewProps {
+  profile: Profile
   date: string
   type: SessionType
   title: string
@@ -23,12 +24,12 @@ interface WorkoutSessionViewProps {
   typeBadge: { label: string; tone: 'lime' | 'orange' }
 }
 
-export function WorkoutSessionView({ date, type, title, subtitle, typeBadge }: WorkoutSessionViewProps) {
+export function WorkoutSessionView({ profile, date, type, title, subtitle, typeBadge }: WorkoutSessionViewProps) {
   const { ready } = useStorageReady()
   const { preferences } = usePreferences()
-  const session = useWorkoutSession(date, type, ready, preferences.units)
-  const { exercises: allExercises, edit: editExercise } = useExercises(ready)
-  const note = useDailyNote(date, ready)
+  const session = useWorkoutSession(profile, date, type, ready, preferences.units)
+  const { exercises: allExercises, edit: editExercise } = useExercises(profile, ready)
+  const note = useDailyNote(profile, date, ready)
 
   const orderedExerciseIds = useMemo(() => session.plan?.exercises.slice().sort((a, b) => a.order - b.order).map((pe) => pe.exerciseId) ?? [], [session.plan])
 
@@ -107,7 +108,7 @@ export function WorkoutSessionView({ date, type, title, subtitle, typeBadge }: W
             from the spreadsheet and are edited there. */}
         {session.plan.type === 'calistenia' && (
           <div style={{ marginTop: 14 }}>
-            <AddExerciseDialog planId={session.plan.id} category="calistenia" storageReady={ready} onAdded={session.refresh} />
+            <AddExerciseDialog profile={profile} planId={session.plan.dayId} category="calistenia" storageReady={ready} onAdded={session.refresh} />
           </div>
         )}
       </div>

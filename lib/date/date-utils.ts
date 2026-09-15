@@ -1,15 +1,5 @@
-import type { SessionType, WeekStartDay } from '@/types'
-
-/** Fixed weekly schedule: Mon/Wed/Fri calistenia, Tue/Thu/Sat gym Día 1/2/3, Sun rest. */
-const WEEKDAY_SCHEDULE: Record<number, SessionType> = {
-  0: 'descanso',
-  1: 'calistenia',
-  2: 'gimnasio-dia-1',
-  3: 'calistenia',
-  4: 'gimnasio-dia-2',
-  5: 'calistenia',
-  6: 'gimnasio-dia-3',
-}
+import type { Profile, SessionType, WeekStartDay } from '@/types'
+import { scheduledTypeForWeekday } from './profile-schedule'
 
 const WEEKDAY_LABELS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
 const WEEKDAY_SHORT = ['DOM', 'LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB']
@@ -30,9 +20,12 @@ export function todayIso(): string {
   return toIsoDate(new Date())
 }
 
-export function sessionTypeForDate(iso: string): SessionType {
+/** El día de rutina que TOCARÍA según el horario semanal fijo de ese perfil —
+ *  no tiene en cuenta un cambio puntual hecho para ese día. Ver
+ *  `hooks/useEffectiveSessionType.ts` para "qué se muestra hoy" de verdad. */
+export function sessionTypeForDate(profile: Profile, iso: string): SessionType {
   const date = fromIsoDate(iso)
-  return WEEKDAY_SCHEDULE[date.getDay()]
+  return scheduledTypeForWeekday(profile, date.getDay())
 }
 
 export function weekdayLabel(iso: string): string {
@@ -84,5 +77,7 @@ export function sessionTypeLabel(type: SessionType): string {
       return 'Gimnasio · Día 2'
     case 'gimnasio-dia-3':
       return 'Gimnasio · Día 3'
+    case 'gimnasio-dia-4':
+      return 'Gimnasio · Día 4'
   }
 }

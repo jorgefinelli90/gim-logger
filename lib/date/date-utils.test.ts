@@ -2,15 +2,25 @@ import { describe, expect, it } from 'vitest'
 import { addDays, getWeekDates, sessionTypeForDate, toIsoDate, fromIsoDate } from './date-utils'
 
 describe('sessionTypeForDate', () => {
-  it('matches the fixed weekly schedule Mon-Sun', () => {
+  it("matches Jorge's fixed weekly schedule Mon-Sun", () => {
     // 2026-09-14 is a Monday.
-    expect(sessionTypeForDate('2026-09-14')).toBe('calistenia') // Mon
-    expect(sessionTypeForDate('2026-09-15')).toBe('gimnasio-dia-1') // Tue
-    expect(sessionTypeForDate('2026-09-16')).toBe('calistenia') // Wed
-    expect(sessionTypeForDate('2026-09-17')).toBe('gimnasio-dia-2') // Thu
-    expect(sessionTypeForDate('2026-09-18')).toBe('calistenia') // Fri
-    expect(sessionTypeForDate('2026-09-19')).toBe('gimnasio-dia-3') // Sat
-    expect(sessionTypeForDate('2026-09-20')).toBe('descanso') // Sun
+    expect(sessionTypeForDate('jorge', '2026-09-14')).toBe('calistenia') // Mon
+    expect(sessionTypeForDate('jorge', '2026-09-15')).toBe('gimnasio-dia-1') // Tue
+    expect(sessionTypeForDate('jorge', '2026-09-16')).toBe('calistenia') // Wed
+    expect(sessionTypeForDate('jorge', '2026-09-17')).toBe('gimnasio-dia-2') // Thu
+    expect(sessionTypeForDate('jorge', '2026-09-18')).toBe('calistenia') // Fri
+    expect(sessionTypeForDate('jorge', '2026-09-19')).toBe('gimnasio-dia-3') // Sat
+    expect(sessionTypeForDate('jorge', '2026-09-20')).toBe('descanso') // Sun
+  })
+
+  it("matches Sebastián's fixed weekly schedule Mon-Sun", () => {
+    expect(sessionTypeForDate('sebas', '2026-09-14')).toBe('descanso') // Mon
+    expect(sessionTypeForDate('sebas', '2026-09-15')).toBe('gimnasio-dia-1') // Tue
+    expect(sessionTypeForDate('sebas', '2026-09-16')).toBe('descanso') // Wed
+    expect(sessionTypeForDate('sebas', '2026-09-17')).toBe('gimnasio-dia-2') // Thu
+    expect(sessionTypeForDate('sebas', '2026-09-18')).toBe('gimnasio-dia-3') // Fri
+    expect(sessionTypeForDate('sebas', '2026-09-19')).toBe('gimnasio-dia-4') // Sat
+    expect(sessionTypeForDate('sebas', '2026-09-20')).toBe('descanso') // Sun
   })
 })
 

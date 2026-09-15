@@ -1,7 +1,7 @@
 'use client'
 
 import { ChevronDown, ChevronUp, GripVertical, Trash2, PersonStanding } from 'lucide-react'
-import type { Exercise, PlanExercise } from '@/types'
+import type { Exercise, PlanExercise, Profile } from '@/types'
 import { usePlanEditor } from '@/hooks/usePlanEditor'
 import { useExercises } from '@/hooks/useExercises'
 import { Input } from '@/components/ui/input'
@@ -10,9 +10,9 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { EmptyState } from '@/components/common/EmptyState'
 import { AddExerciseDialog } from './AddExerciseDialog'
 
-export function CalisthenicsEditor({ storageReady }: { storageReady: boolean }) {
-  const { plan, updateExercise, removeExercise, moveExercise, refresh } = usePlanEditor('calistenia', storageReady)
-  const { exercises } = useExercises(storageReady)
+export function CalisthenicsEditor({ profile, storageReady }: { profile: Profile; storageReady: boolean }) {
+  const { plan, updateExercise, removeExercise, moveExercise, refresh } = usePlanEditor(profile, 'calistenia', storageReady)
+  const { exercises } = useExercises(profile, storageReady)
 
   const exerciseMap = Object.fromEntries(exercises.map((e) => [e.id, e]))
   const sortedPlanExercises = plan?.exercises.slice().sort((a, b) => a.order - b.order) ?? []
@@ -44,7 +44,7 @@ export function CalisthenicsEditor({ storageReady }: { storageReady: boolean }) 
       })}
 
       <div style={{ justifySelf: 'start' }}>
-        <AddExerciseDialog planId="calistenia" category="calistenia" storageReady={storageReady} onAdded={refresh} />
+        <AddExerciseDialog profile={profile} planId="calistenia" category="calistenia" storageReady={storageReady} onAdded={refresh} />
       </div>
     </div>
   )

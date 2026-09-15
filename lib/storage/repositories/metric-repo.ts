@@ -1,12 +1,12 @@
 import { deleteOne, getAll, putOne } from '../db'
 import { createId, nowIso } from '../ids'
-import type { BodyMetric, BodyMetricInput } from '@/types'
+import type { BodyMetric, BodyMetricInput, Profile } from '@/types'
 
 const STORE = 'bodyMetrics' as const
 
-export async function listBodyMetrics(): Promise<BodyMetric[]> {
+export async function listBodyMetrics(profile: Profile): Promise<BodyMetric[]> {
   const all = await getAll<BodyMetric>(STORE)
-  return all.sort((a, b) => a.date.localeCompare(b.date))
+  return all.filter((m) => m.profile === profile).sort((a, b) => a.date.localeCompare(b.date))
 }
 
 export async function addBodyMetric(input: BodyMetricInput): Promise<BodyMetric> {

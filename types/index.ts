@@ -1,3 +1,4 @@
+export * from './profile'
 export * from './exercise'
 export * from './workout-plan'
 export * from './workout-session'

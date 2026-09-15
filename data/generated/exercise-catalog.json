@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-14T18:56:27.206Z",
+  "generatedAt": "2026-09-15T16:03:52.656Z",
   "cdnBase": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0",
   "entries": [
     {
-      "key": "g1-0",
+      "key": "g1-0-pecho-press-superior-con-barra-en-maquina",
       "name": "Press superior con barra en máquina",
       "muscleGroupRaw": "PECHO",
       "matched": true,
@@ -26,7 +26,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/lever-incline-chest-press.thumb.webp"
     },
     {
-      "key": "g1-1",
+      "key": "g1-1-pecho-press-plano-en-maquina",
       "name": "Press plano en máquina",
       "muscleGroupRaw": "PECHO",
       "matched": true,
@@ -48,7 +48,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/lever-chest-press.thumb.webp"
     },
     {
-      "key": "g1-2",
+      "key": "g1-2-pecho-fondos-en-paralelas-maquina",
       "name": "Fondos en paralelas / máquina",
       "muscleGroupRaw": "PECHO",
       "matched": true,
@@ -70,7 +70,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/chest-dip.thumb.webp"
     },
     {
-      "key": "g1-3",
+      "key": "g1-3-tricpes-extension-de-triceps-sobre-la-cabeza-con-soga",
       "name": "Extensión de tríceps sobre la cabeza con soga",
       "muscleGroupRaw": "TRICPES",
       "matched": true,
@@ -92,7 +92,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-overhead-triceps-extension-rope-attachment.thumb.webp"
     },
     {
-      "key": "g1-4",
+      "key": "g1-4-tricpes-extension-de-triceps-con-barra-recta",
       "name": "Extensión de tríceps con barra recta",
       "muscleGroupRaw": "TRICPES",
       "matched": true,
@@ -114,7 +114,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-pushdown.thumb.webp"
     },
     {
-      "key": "g1-5",
+      "key": "g1-5-tricpes-extension-de-triceps-con-soga-agarre-neutro",
       "name": "Extensión de tríceps con soga (agarre neutro)",
       "muscleGroupRaw": "TRICPES",
       "matched": true,
@@ -136,7 +136,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-pushdown-with-rope-attachment.thumb.webp"
     },
     {
-      "key": "g1-6",
+      "key": "g1-6-antebrazos-curl-de-muneca-en-supinacion-con-barra-recta",
       "name": "Curl de muñeca en supinación con barra recta",
       "muscleGroupRaw": "ANTEBRAZOS",
       "matched": true,
@@ -158,7 +158,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/forearms/barbell-wrist-curl.thumb.webp"
     },
     {
-      "key": "g1-7",
+      "key": "g1-7-antebrazos-flexion-de-muneca-con-polea-por-detras",
       "name": "Flexión de muñeca con polea por detrás",
       "muscleGroupRaw": "ANTEBRAZOS",
       "matched": true,
@@ -180,7 +180,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/forearms/cable-standing-back-wrist-curl.thumb.webp"
     },
     {
-      "key": "g2-0",
+      "key": "g2-0-espalda-jalon-al-pecho-en-polea",
       "name": "Jalón al pecho en polea",
       "muscleGroupRaw": "ESPALDA",
       "matched": true,
@@ -202,7 +202,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/cable-pulldown.thumb.webp"
     },
     {
-      "key": "g2-1",
+      "key": "g2-1-espalda-remo-en-maquina-o-polea-baja",
       "name": "Remo en máquina o polea baja",
       "muscleGroupRaw": "ESPALDA",
       "matched": true,
@@ -224,7 +224,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/cable-low-seated-row.thumb.webp"
     },
     {
-      "key": "g2-2",
+      "key": "g2-2-espalda-pullover-en-polea-alta",
       "name": "Pullover en polea alta",
       "muscleGroupRaw": "ESPALDA",
       "matched": true,
@@ -246,7 +246,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/cable-straight-arm-pulldown.thumb.webp"
     },
     {
-      "key": "g2-3",
+      "key": "g2-3-biceps-curl-con-barra-z-o-recta",
       "name": "Curl con barra Z o recta",
       "muscleGroupRaw": "BICEPS",
       "matched": true,
@@ -268,7 +268,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/ez-barbell-curl.thumb.webp"
     },
     {
-      "key": "g2-4",
+      "key": "g2-4-biceps-curl-martillo-con-mancuernas",
       "name": "Curl martillo con mancuernas",
       "muscleGroupRaw": "BICEPS",
       "matched": true,
@@ -290,7 +290,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-hammer-curl.thumb.webp"
     },
     {
-      "key": "g2-5",
+      "key": "g2-5-biceps-curl-en-polea-baja",
       "name": "Curl en polea baja",
       "muscleGroupRaw": "BICEPS",
       "matched": true,
@@ -312,7 +312,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/cable-curl.thumb.webp"
     },
     {
-      "key": "g2-6",
+      "key": "g2-6-hombros-press-militar-con-mancuernas-o-maquina",
       "name": "Press militar con mancuernas o máquina",
       "muscleGroupRaw": "HOMBROS",
       "matched": true,
@@ -334,7 +334,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/lever-military-press.thumb.webp"
     },
     {
-      "key": "g2-7",
+      "key": "g2-7-hombros-elevaciones-laterales-con-mancuernas-polea",
       "name": "Elevaciones laterales con mancuernas/polea",
       "muscleGroupRaw": "HOMBROS",
       "matched": true,
@@ -356,7 +356,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-lateral-raise.thumb.webp"
     },
     {
-      "key": "g2-8",
+      "key": "g2-8-hombros-elevaciones-frontales-con-mancuernas-polea",
       "name": "Elevaciones frontales con mancuernas/polea",
       "muscleGroupRaw": "HOMBROS",
       "matched": true,
@@ -378,7 +378,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-front-raise.thumb.webp"
     },
     {
-      "key": "g3-0",
+      "key": "g3-0-piernas-prensa-de-pierna-inclinada",
       "name": "Prensa de pierna inclinada",
       "muscleGroupRaw": "PIERNAS",
       "matched": true,
@@ -400,7 +400,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/sled-45-leg-press.thumb.webp"
     },
     {
-      "key": "g3-1",
+      "key": "g3-1-piernas-extensiones-de-cuadriceps-en-maquina",
       "name": "Extensiones de cuádriceps en máquina",
       "muscleGroupRaw": "PIERNAS",
       "matched": true,
@@ -422,7 +422,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/lever-leg-extension.thumb.webp"
     },
     {
-      "key": "g3-2",
+      "key": "g3-2-piernas-curl-femoral-acostado-o-sentado",
       "name": "Curl femoral acostado o sentado",
       "muscleGroupRaw": "PIERNAS",
       "matched": true,
@@ -444,7 +444,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/hamstrings/lever-seated-leg-curl.thumb.webp"
     },
     {
-      "key": "g3-3",
+      "key": "g3-3-piernas-peso-muerto-rumano-con-mancuernas-barra",
       "name": "Peso muerto rumano con mancuernas/barra",
       "muscleGroupRaw": "PIERNAS",
       "matched": true,
@@ -466,7 +466,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/dumbbell-romanian-deadlift.thumb.webp"
     },
     {
-      "key": "g3-4",
+      "key": "g3-4-piernas-elevacion-de-talones-para-pantorrillas",
       "name": "Elevación de talones para pantorrillas",
       "muscleGroupRaw": "PIERNAS",
       "matched": true,
@@ -488,7 +488,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/calves/lever-standing-calf-raise.thumb.webp"
     },
     {
-      "key": "g3-5",
+      "key": "g3-5-abdominales-crunch-abdominal-en-maquina-o-suelo",
       "name": "Crunch abdominal en máquina o suelo",
       "muscleGroupRaw": "ABDOMINALES",
       "matched": true,
@@ -510,7 +510,7 @@
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/crunch-floor.thumb.webp"
     },
     {
-      "key": "g3-6",
+      "key": "g3-6-abdominales-elevacion-de-piernas-colgado",
       "name": "Elevación de piernas colgado",
       "muscleGroupRaw": "ABDOMINALES",
       "matched": true,
@@ -530,6 +530,770 @@
       ],
       "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/hanging-leg-raise.gif",
       "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/hanging-leg-raise.thumb.webp"
+    },
+    {
+      "key": "sebas-g1-0-pecho-press-superior-con-barra-en-maquina-smith",
+      "name": "Press superior con barra en máquina SMITH",
+      "muscleGroupRaw": "PECHO",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "smith-incline-bench-press",
+      "catalogName": "Press en máquina Smith, en banco inclinado",
+      "muscle": "pectorals",
+      "equipment": "smith",
+      "bodyPart": "chest",
+      "instructions": [
+        "Coloca la barra en la máquina Smith a la altura adecuada.",
+        "Activa el pectoral antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/smith-incline-bench-press.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/smith-incline-bench-press.thumb.webp"
+    },
+    {
+      "key": "sebas-g1-1-pecho-press-plano-en-maquina-smith",
+      "name": "Press plano en máquina SMITH",
+      "muscleGroupRaw": "PECHO",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "smith-bench-press",
+      "catalogName": "Press de banca en máquina Smith",
+      "muscle": "pectorals",
+      "equipment": "smith",
+      "bodyPart": "chest",
+      "instructions": [
+        "Coloca la barra en la máquina Smith a la altura adecuada.",
+        "Activa el pectoral antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/smith-bench-press.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/smith-bench-press.thumb.webp"
+    },
+    {
+      "key": "sebas-g1-2-pecho-fondos-en-paralelas",
+      "name": "Fondos en paralelas",
+      "muscleGroupRaw": "PECHO",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "chest-dip",
+      "catalogName": "Fondo, pecho",
+      "muscle": "pectorals",
+      "equipment": "bodyweight",
+      "bodyPart": "chest",
+      "instructions": [
+        "Adopta la postura inicial con buena alineación corporal.",
+        "Activa el pectoral antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/chest-dip.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/chest-dip.thumb.webp"
+    },
+    {
+      "key": "sebas-g1-3-tricpes-extension-de-triceps-sobre-la-cabeza-con-soga",
+      "name": "Extensión de tríceps sobre la cabeza con soga",
+      "muscleGroupRaw": "TRICPES",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "cable-overhead-triceps-extension-rope-attachment",
+      "catalogName": "Extensión de tríceps sobre la cabeza en polea con cuerda, attachment",
+      "muscle": "triceps",
+      "equipment": "cable",
+      "bodyPart": "arms",
+      "instructions": [
+        "Ajusta la polea a la altura indicada y selecciona el peso.",
+        "Activa los tríceps antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-overhead-triceps-extension-rope-attachment.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-overhead-triceps-extension-rope-attachment.thumb.webp"
+    },
+    {
+      "key": "sebas-g1-4-tricpes-extension-de-triceps-con-barra-recta",
+      "name": "Extensión de tríceps con barra recta",
+      "muscleGroupRaw": "TRICPES",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "cable-pushdown",
+      "catalogName": "Pushdown en polea",
+      "muscle": "triceps",
+      "equipment": "cable",
+      "bodyPart": "arms",
+      "instructions": [
+        "Ajusta la polea a la altura indicada y selecciona el peso.",
+        "Activa los tríceps antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-pushdown.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-pushdown.thumb.webp"
+    },
+    {
+      "key": "sebas-g1-5-tricpes-extension-de-triceps-con-soga-agarre-neutro",
+      "name": "Extensión de tríceps con soga (agarre neutro)",
+      "muscleGroupRaw": "TRICPES",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "cable-pushdown-with-rope-attachment",
+      "catalogName": "Pushdown en polea, con cuerda",
+      "muscle": "triceps",
+      "equipment": "cable",
+      "bodyPart": "arms",
+      "instructions": [
+        "Ajusta la polea a la altura indicada y selecciona el peso.",
+        "Activa los tríceps antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-pushdown-with-rope-attachment.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-pushdown-with-rope-attachment.thumb.webp"
+    },
+    {
+      "key": "sebas-g1-6-antebrazos-curl-de-muneca-en-supinacion-con-barra-recta",
+      "name": "Curl de muñeca en supinación con barra recta",
+      "muscleGroupRaw": "ANTEBRAZOS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "barbell-wrist-curl",
+      "catalogName": "Curl de muñeca con barra",
+      "muscle": "forearms",
+      "equipment": "barbell",
+      "bodyPart": "arms",
+      "instructions": [
+        "Carga el peso adecuado en la barra y adopta la postura inicial.",
+        "Activa los antebrazos antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/forearms/barbell-wrist-curl.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/forearms/barbell-wrist-curl.thumb.webp"
+    },
+    {
+      "key": "sebas-g1-7-antebrazos-flexion-de-muneca-con-polea-por-detras",
+      "name": "Flexión de muñeca con polea por detrás",
+      "muscleGroupRaw": "ANTEBRAZOS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "cable-standing-back-wrist-curl",
+      "catalogName": "Curl de muñeca en polea, de pie, espalda",
+      "muscle": "forearms",
+      "equipment": "cable",
+      "bodyPart": "arms",
+      "instructions": [
+        "Ajusta la polea a la altura indicada y selecciona el peso.",
+        "Activa los antebrazos antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/forearms/cable-standing-back-wrist-curl.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/forearms/cable-standing-back-wrist-curl.thumb.webp"
+    },
+    {
+      "key": "sebas-g2-0-espalda-dominadas-en-barra-agarre-prono",
+      "name": "Dominadas en barra agarre prono",
+      "muscleGroupRaw": "ESPALDA",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "pull-up",
+      "catalogName": "Dominada",
+      "muscle": "lats",
+      "equipment": "bodyweight",
+      "bodyPart": "back",
+      "instructions": [
+        "Adopta la postura inicial con buena alineación corporal.",
+        "Activa los dorsales antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/pull-up.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/pull-up.thumb.webp"
+    },
+    {
+      "key": "sebas-g2-1-espalda-dominadas-en-barra-agarre-supino",
+      "name": "Dominadas en barra agarre supino",
+      "muscleGroupRaw": "ESPALDA",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "chin-up",
+      "catalogName": "Dominada supina",
+      "muscle": "lats",
+      "equipment": "bodyweight",
+      "bodyPart": "back",
+      "instructions": [
+        "Adopta la postura inicial con buena alineación corporal.",
+        "Activa los dorsales antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/chin-up.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/chin-up.thumb.webp"
+    },
+    {
+      "key": "sebas-g2-2-espalda-jalon-al-pecho-en-polea",
+      "name": "Jalón al pecho en polea",
+      "muscleGroupRaw": "ESPALDA",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "cable-pulldown",
+      "catalogName": "Jalón al pecho en polea",
+      "muscle": "lats",
+      "equipment": "cable",
+      "bodyPart": "back",
+      "instructions": [
+        "Ajusta la polea a la altura indicada y selecciona el peso.",
+        "Activa los dorsales antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/cable-pulldown.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/cable-pulldown.thumb.webp"
+    },
+    {
+      "key": "sebas-g2-3-espalda-remo-en-maquina",
+      "name": "Remo en máquina",
+      "muscleGroupRaw": "ESPALDA",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "lever-seated-row",
+      "catalogName": "Remo sentado en máquina",
+      "muscle": "upper-back",
+      "equipment": "lever",
+      "bodyPart": "back",
+      "instructions": [
+        "Ajusta la máquina a tu medida y selecciona la carga.",
+        "Activa la espalda alta antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/lever-seated-row.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/lever-seated-row.thumb.webp"
+    },
+    {
+      "key": "sebas-g2-4-espalda-pullover-en-polea-alta",
+      "name": "Pullover en polea alta",
+      "muscleGroupRaw": "ESPALDA",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "cable-straight-arm-pulldown",
+      "catalogName": "Jalón al pecho en polea, con brazo recto",
+      "muscle": "lats",
+      "equipment": "cable",
+      "bodyPart": "back",
+      "instructions": [
+        "Ajusta la polea a la altura indicada y selecciona el peso.",
+        "Activa los dorsales antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/cable-straight-arm-pulldown.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/cable-straight-arm-pulldown.thumb.webp"
+    },
+    {
+      "key": "sebas-g2-5-biceps-curl-con-barra-z-o-recta",
+      "name": "Curl con barra Z o recta",
+      "muscleGroupRaw": "BICEPS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "ez-barbell-curl",
+      "catalogName": "Curl con barra Z",
+      "muscle": "biceps",
+      "equipment": "ez-bar",
+      "bodyPart": "arms",
+      "instructions": [
+        "Carga la barra Z con un peso adecuado y agárrala con firmeza.",
+        "Activa los bíceps antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/ez-barbell-curl.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/ez-barbell-curl.thumb.webp"
+    },
+    {
+      "key": "sebas-g2-6-biceps-curl-martillo-con-mancuernas",
+      "name": "Curl martillo con mancuernas",
+      "muscleGroupRaw": "BICEPS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "dumbbell-hammer-curl",
+      "catalogName": "Curl martillo con mancuerna",
+      "muscle": "biceps",
+      "equipment": "dumbbell",
+      "bodyPart": "arms",
+      "instructions": [
+        "Coge una mancuerna en cada mano (o la indicada) con un peso adecuado.",
+        "Activa los bíceps antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-hammer-curl.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-hammer-curl.thumb.webp"
+    },
+    {
+      "key": "sebas-g2-7-biceps-curl-en-polea-baja",
+      "name": "Curl en polea baja",
+      "muscleGroupRaw": "BICEPS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "cable-curl",
+      "catalogName": "Curl en polea",
+      "muscle": "biceps",
+      "equipment": "cable",
+      "bodyPart": "arms",
+      "instructions": [
+        "Ajusta la polea a la altura indicada y selecciona el peso.",
+        "Activa los bíceps antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/cable-curl.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/cable-curl.thumb.webp"
+    },
+    {
+      "key": "sebas-g2-8-hombros-press-militar-con-mancuernas",
+      "name": "Press militar con mancuernas",
+      "muscleGroupRaw": "HOMBROS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "dumbbell-seated-shoulder-press",
+      "catalogName": "Press de hombros con mancuerna, sentado",
+      "muscle": "delts",
+      "equipment": "dumbbell",
+      "bodyPart": "shoulders",
+      "instructions": [
+        "Coge una mancuerna en cada mano (o la indicada) con un peso adecuado.",
+        "Activa los hombros antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-seated-shoulder-press.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-seated-shoulder-press.thumb.webp"
+    },
+    {
+      "key": "sebas-g2-9-hombros-elevaciones-laterales-con-mancuernas",
+      "name": "Elevaciones laterales con mancuernas",
+      "muscleGroupRaw": "HOMBROS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "dumbbell-lateral-raise",
+      "catalogName": "Elevación lateral con mancuerna",
+      "muscle": "delts",
+      "equipment": "dumbbell",
+      "bodyPart": "shoulders",
+      "instructions": [
+        "Coge una mancuerna en cada mano (o la indicada) con un peso adecuado.",
+        "Activa los hombros antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-lateral-raise.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-lateral-raise.thumb.webp"
+    },
+    {
+      "key": "sebas-g2-10-abdominales-colgados-en-barra-piernas-en-l",
+      "name": "Colgados en barra piernas en L",
+      "muscleGroupRaw": "ABDOMINALES",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "hanging-straight-leg-raise",
+      "catalogName": "Elevación, colgado, con pierna recta",
+      "muscle": "abs",
+      "equipment": "bodyweight",
+      "bodyPart": "core",
+      "instructions": [
+        "Adopta la postura inicial con buena alineación corporal.",
+        "Activa el core antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/hanging-straight-leg-raise.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/hanging-straight-leg-raise.thumb.webp"
+    },
+    {
+      "key": "sebas-g3-0-piernas-prensa-de-pierna-inclinada",
+      "name": "Prensa de pierna inclinada",
+      "muscleGroupRaw": "PIERNAS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "sled-45-leg-press",
+      "catalogName": "Prensa de piernas a 45° en trineo",
+      "muscle": "glutes",
+      "equipment": "sled",
+      "bodyPart": "legs",
+      "instructions": [
+        "Prepara el equipo y adopta la postura inicial.",
+        "Activa los glúteos antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/sled-45-leg-press.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/sled-45-leg-press.thumb.webp"
+    },
+    {
+      "key": "sebas-g3-1-piernas-extensiones-de-cuadriceps-en-maquina",
+      "name": "Extensiones de cuádriceps en máquina",
+      "muscleGroupRaw": "PIERNAS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "lever-leg-extension",
+      "catalogName": "Extensión de cuádriceps en máquina",
+      "muscle": "quads",
+      "equipment": "lever",
+      "bodyPart": "legs",
+      "instructions": [
+        "Ajusta la máquina a tu medida y selecciona la carga.",
+        "Activa los cuádriceps antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/lever-leg-extension.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/lever-leg-extension.thumb.webp"
+    },
+    {
+      "key": "sebas-g3-2-piernas-curl-femoral-acostado-o-sentado",
+      "name": "Curl femoral acostado o sentado",
+      "muscleGroupRaw": "PIERNAS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "lever-seated-leg-curl",
+      "catalogName": "Curl femoral en máquina, sentado",
+      "muscle": "hamstrings",
+      "equipment": "lever",
+      "bodyPart": "legs",
+      "instructions": [
+        "Ajusta la máquina a tu medida y selecciona la carga.",
+        "Activa los isquiotibiales antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/hamstrings/lever-seated-leg-curl.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/hamstrings/lever-seated-leg-curl.thumb.webp"
+    },
+    {
+      "key": "sebas-g3-3-piernas-peso-muerto-rumano-con-mancuernas-barra",
+      "name": "Peso muerto rumano con mancuernas/barra",
+      "muscleGroupRaw": "PIERNAS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "dumbbell-romanian-deadlift",
+      "catalogName": "Peso muerto rumano con mancuerna",
+      "muscle": "glutes",
+      "equipment": "dumbbell",
+      "bodyPart": "legs",
+      "instructions": [
+        "Coge una mancuerna en cada mano (o la indicada) con un peso adecuado.",
+        "Activa los glúteos antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/dumbbell-romanian-deadlift.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/dumbbell-romanian-deadlift.thumb.webp"
+    },
+    {
+      "key": "sebas-g3-4-piernas-elevacion-de-talones-para-pantorrillas",
+      "name": "Elevación de talones para pantorrillas",
+      "muscleGroupRaw": "PIERNAS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "lever-standing-calf-raise",
+      "catalogName": "Elevación de talones en máquina, de pie",
+      "muscle": "calves",
+      "equipment": "lever",
+      "bodyPart": "legs",
+      "instructions": [
+        "Ajusta la máquina a tu medida y selecciona la carga.",
+        "Activa los gemelos antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/calves/lever-standing-calf-raise.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/calves/lever-standing-calf-raise.thumb.webp"
+    },
+    {
+      "key": "sebas-g3-5-abdominales-crunch-abdominal-en-maquina",
+      "name": "Crunch abdominal en máquina",
+      "muscleGroupRaw": "ABDOMINALES",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "lever-seated-crunch",
+      "catalogName": "Crunch en máquina, sentado",
+      "muscle": "abs",
+      "equipment": "lever",
+      "bodyPart": "core",
+      "instructions": [
+        "Ajusta la máquina a tu medida y selecciona la carga.",
+        "Activa el core antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/lever-seated-crunch.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/lever-seated-crunch.thumb.webp"
+    },
+    {
+      "key": "sebas-g3-6-abdominales-con-disco-de-un-costado-al-otro",
+      "name": "Con Disco de un costado al otro,",
+      "muscleGroupRaw": "ABDOMINALES",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "weighted-russian-twist",
+      "catalogName": "Russian twist, con peso",
+      "muscle": "abs",
+      "equipment": "bodyweight",
+      "bodyPart": "core",
+      "instructions": [
+        "Adopta la postura inicial con buena alineación corporal.",
+        "Activa el core antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/weighted-russian-twist.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/weighted-russian-twist.thumb.webp"
+    },
+    {
+      "key": "sebas-g4-0-bicpes-curl-con-mancuernas-sentados-en-banco-de-45",
+      "name": "Curl con mancuernas sentados en banco de 45",
+      "muscleGroupRaw": "BICPES",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "dumbbell-incline-curl",
+      "catalogName": "Curl inclinado con mancuerna",
+      "muscle": "biceps",
+      "equipment": "dumbbell",
+      "bodyPart": "arms",
+      "instructions": [
+        "Coge una mancuerna en cada mano (o la indicada) con un peso adecuado.",
+        "Activa los bíceps antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-incline-curl.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-incline-curl.thumb.webp"
+    },
+    {
+      "key": "sebas-g4-1-bicpes-curl-martillo-con-mancuernas-cruzada-al-pecho",
+      "name": "Curl martillo con mancuernas cruzada al pecho",
+      "muscleGroupRaw": "BICPES",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "dumbbell-cross-body-hammer-curl",
+      "catalogName": "Curl martillo cruzado al cuerpo con mancuerna",
+      "muscle": "biceps",
+      "equipment": "dumbbell",
+      "bodyPart": "arms",
+      "instructions": [
+        "Coge una mancuerna en cada mano (o la indicada) con un peso adecuado.",
+        "Activa los bíceps antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-cross-body-hammer-curl.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-cross-body-hammer-curl.thumb.webp"
+    },
+    {
+      "key": "sebas-g4-2-tricpes-extension-de-triceps-con-soga-de-una-mano-a-la-vez",
+      "name": "Extensión de tríceps con soga de una mano a la vez",
+      "muscleGroupRaw": "TRICPES",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "cable-standing-one-arm-triceps-extension",
+      "catalogName": "Extensión de tríceps en polea, de pie, a una mano",
+      "muscle": "triceps",
+      "equipment": "cable",
+      "bodyPart": "arms",
+      "instructions": [
+        "Ajusta la polea a la altura indicada y selecciona el peso.",
+        "Activa los tríceps antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-standing-one-arm-triceps-extension.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-standing-one-arm-triceps-extension.thumb.webp"
+    },
+    {
+      "key": "sebas-g4-3-tricpes-extension-de-triceps-con-soga",
+      "name": "Extensión de tríceps con soga",
+      "muscleGroupRaw": "TRICPES",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "cable-pushdown-with-rope-attachment",
+      "catalogName": "Pushdown en polea, con cuerda",
+      "muscle": "triceps",
+      "equipment": "cable",
+      "bodyPart": "arms",
+      "instructions": [
+        "Ajusta la polea a la altura indicada y selecciona el peso.",
+        "Activa los tríceps antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-pushdown-with-rope-attachment.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-pushdown-with-rope-attachment.thumb.webp"
+    },
+    {
+      "key": "sebas-g4-4-hombros-press-militar-con-maquina",
+      "name": "Press militar con  máquina",
+      "muscleGroupRaw": "HOMBROS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "lever-military-press",
+      "catalogName": "Press militar en máquina",
+      "muscle": "delts",
+      "equipment": "lever",
+      "bodyPart": "shoulders",
+      "instructions": [
+        "Ajusta la máquina a tu medida y selecciona la carga.",
+        "Activa los hombros antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/lever-military-press.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/lever-military-press.thumb.webp"
+    },
+    {
+      "key": "sebas-g4-5-hombros-elevaciones-laterales-con-polea",
+      "name": "Elevaciones laterales con polea",
+      "muscleGroupRaw": "HOMBROS",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "cable-lateral-raise",
+      "catalogName": "Elevación lateral en polea",
+      "muscle": "delts",
+      "equipment": "cable",
+      "bodyPart": "shoulders",
+      "instructions": [
+        "Ajusta la polea a la altura indicada y selecciona el peso.",
+        "Activa los hombros antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/cable-lateral-raise.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/cable-lateral-raise.thumb.webp"
+    },
+    {
+      "key": "sebas-g4-6-hombros-press-militar-frontal-con-disco",
+      "name": "Press militar Frontal con disco",
+      "muscleGroupRaw": "HOMBROS",
+      "matched": false,
+      "matchMethod": "none-honest",
+      "matchScore": 0,
+      "catalogSlug": null,
+      "catalogName": null,
+      "muscle": null,
+      "equipment": null,
+      "bodyPart": null,
+      "instructions": [],
+      "gifUrl": null,
+      "thumbUrl": null
+    },
+    {
+      "key": "sebas-g4-7-trapecio-press-al-menton-con-polea-y-soga",
+      "name": "Press al mentón con polea y soga",
+      "muscleGroupRaw": "TRAPECIO",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "cable-upright-row",
+      "catalogName": "Remo al mentón en polea",
+      "muscle": "delts",
+      "equipment": "cable",
+      "bodyPart": "shoulders",
+      "instructions": [
+        "Ajusta la polea a la altura indicada y selecciona el peso.",
+        "Activa los hombros antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/cable-upright-row.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/cable-upright-row.thumb.webp"
+    },
+    {
+      "key": "sebas-g4-8-trapecio-press-militar-con-mancuernas-o-maquina",
+      "name": "Press militar con mancuernas o máquina",
+      "muscleGroupRaw": "TRAPECIO",
+      "matched": true,
+      "matchMethod": "override",
+      "matchScore": 1,
+      "catalogSlug": "lever-military-press",
+      "catalogName": "Press militar en máquina",
+      "muscle": "delts",
+      "equipment": "lever",
+      "bodyPart": "shoulders",
+      "instructions": [
+        "Ajusta la máquina a tu medida y selecciona la carga.",
+        "Activa los hombros antes de iniciar el movimiento.",
+        "Realiza el movimiento de forma controlada manteniendo la técnica.",
+        "Vuelve a la posición inicial controlando la fase excéntrica.",
+        "Mantén la respiración: exhala en el esfuerzo, inhala al volver."
+      ],
+      "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/lever-military-press.gif",
+      "thumbUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/lever-military-press.thumb.webp"
     },
     {
       "key": "calistenia-flexiones",

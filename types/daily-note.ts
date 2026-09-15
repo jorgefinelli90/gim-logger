@@ -1,6 +1,9 @@
+import type { Profile } from './profile'
+
 export interface DailyNote {
   id: string
-  /** ISO date (yyyy-mm-dd). One note per day. */
+  profile: Profile
+  /** ISO date (yyyy-mm-dd). One note per (profile, date) — Jorge and Sebas can each have their own note the same day. */
   date: string
   general: string
   energyLevel: number | null // 1-5

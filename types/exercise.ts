@@ -1,3 +1,5 @@
+import type { Profile } from './profile'
+
 export type ExerciseCategory = 'gimnasio' | 'calistenia' | 'movilidad'
 
 export type MuscleGroup =
@@ -27,6 +29,8 @@ export interface ExerciseImage {
 
 export interface Exercise {
   id: string
+  /** De quién es este ejercicio — Jorge y Sebas tienen listas separadas. */
+  profile: Profile
   name: string
   aliases: string[]
   muscleGroup: MuscleGroup

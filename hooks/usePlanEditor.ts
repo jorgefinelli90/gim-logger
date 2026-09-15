@@ -1,25 +1,28 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import type { PlanDayId, PlanExercise, WorkoutPlan } from '@/types'
+import type { PlanDayId, PlanExercise, Profile, WorkoutPlan } from '@/types'
 import { getPlan, savePlan } from '@/lib/storage/repositories/plan-repo'
 import { createId, nowIso } from '@/lib/storage/ids'
+import { useSyncRefresh } from '@/lib/sync/notify'
 
 /** Add / edit / reorder / remove the exercises of a stored workout plan. */
-export function usePlanEditor(planId: PlanDayId, storageReady: boolean) {
+export function usePlanEditor(profile: Profile, planId: PlanDayId, storageReady: boolean) {
   const [plan, setPlan] = useState<WorkoutPlan | null>(null)
   const [loading, setLoading] = useState(true)
 
   const load = useCallback(async () => {
     if (!storageReady) return
-    const result = await getPlan(planId)
+    const result = await getPlan(profile, planId)
     setPlan(result ?? null)
     setLoading(false)
-  }, [planId, storageReady])
+  }, [profile, planId, storageReady])
 
   useEffect(() => {
     load()
   }, [load])
+
+  useSyncRefresh(load)
 
   const persist = useCallback(async (next: WorkoutPlan) => {
     await savePlan(next)

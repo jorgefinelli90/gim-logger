@@ -1,12 +1,15 @@
 import { deleteOne, getAll, getOne, putOne } from '../db'
 import { createId, nowIso } from '../ids'
-import type { Exercise, ExerciseInput } from '@/types'
+import type { Exercise, ExerciseInput, Profile } from '@/types'
 
 const STORE = 'exercises' as const
 
-export async function listExercises(): Promise<Exercise[]> {
+/** Todos los ejercicios de un perfil. El dataset es chico (decenas de filas
+ *  por persona), así que filtrar en memoria después de leer todo es más
+ *  simple y suficientemente rápido que mantener un índice por perfil. */
+export async function listExercises(profile: Profile): Promise<Exercise[]> {
   const all = await getAll<Exercise>(STORE)
-  return all.sort((a, b) => a.order - b.order)
+  return all.filter((e) => e.profile === profile).sort((a, b) => a.order - b.order)
 }
 
 export async function getExercise(id: string): Promise<Exercise | undefined> {
@@ -40,5 +43,9 @@ export async function seedExercisesIfMissing(exercises: Exercise[]): Promise<voi
   const existing = await getAll<Exercise>(STORE)
   const existingIds = new Set(existing.map((e) => e.id))
   const missing = exercises.filter((e) => !existingIds.has(e.id))
-  await Promise.all(missing.map((exercise) => putOne(STORE, exercise)))
+  // `track: false`: la semilla sale del Excel del repo y es idéntica en todos
+  // los dispositivos, así que no es "un cambio mío". Si se encolara, vincular
+  // un teléfono nuevo subiría la versión recién sembrada y borraría del
+  // servidor el GIF personalizado o el nombre que hubieras editado.
+  await Promise.all(missing.map((exercise) => putOne(STORE, exercise, false)))
 }

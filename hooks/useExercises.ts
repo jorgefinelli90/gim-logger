@@ -1,10 +1,11 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import type { Exercise, ExerciseInput } from '@/types'
+import type { Exercise, ExerciseInput, Profile } from '@/types'
 import { createExercise, deleteExercise, listExercises, updateExercise } from '@/lib/storage/repositories/exercise-repo'
+import { useSyncRefresh } from '@/lib/sync/notify'
 
-export function useExercises(storageReady: boolean) {
+export function useExercises(profile: Profile, storageReady: boolean) {
   const [exercises, setExercises] = useState<Exercise[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -13,18 +14,21 @@ export function useExercises(storageReady: boolean) {
     if (!storageReady) return
     setLoading(true)
     try {
-      setExercises(await listExercises())
+      setExercises(await listExercises(profile))
       setError(null)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'No se pudieron cargar los ejercicios.')
     } finally {
       setLoading(false)
     }
-  }, [storageReady])
+  }, [profile, storageReady])
 
   useEffect(() => {
     refresh()
   }, [refresh])
+
+  // Se relee cuando el sync baja cambios hechos en otro dispositivo.
+  useSyncRefresh(refresh)
 
   const add = useCallback(
     async (input: ExerciseInput) => {

@@ -3,7 +3,10 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Dumbbell, X } from 'lucide-react'
-import { PRIMARY_NAV, SECONDARY_NAV, SETTINGS_NAV } from './nav-items'
+import { primaryNavForProfile, SECONDARY_NAV, SETTINGS_NAV } from './nav-items'
+import { SyncChip } from '@/components/sync/SyncChip'
+import { ProfileSwitcher } from '@/components/profile/ProfileSwitcher'
+import { useActiveProfile } from '@/lib/profile/ProfileContext'
 
 interface SidebarProps {
   open: boolean
@@ -18,6 +21,8 @@ function isActive(pathname: string, href: string): boolean {
 
 export function Sidebar({ open, onClose, weeklyPercent }: SidebarProps) {
   const pathname = usePathname()
+  const { profile } = useActiveProfile()
+  const primaryNav = primaryNavForProfile(profile)
 
   return (
     <aside className={`sidebar ${open ? 'open' : ''}`}>
@@ -33,8 +38,9 @@ export function Sidebar({ open, onClose, weeklyPercent }: SidebarProps) {
           <X />
         </button>
       </div>
+      <ProfileSwitcher />
       <nav>
-        {PRIMARY_NAV.map((item) => (
+        {primaryNav.map((item) => (
           <Link key={item.href} href={item.href} className={`nav-item ${isActive(pathname, item.href) ? 'active' : ''}`} onClick={onClose}>
             <item.icon aria-hidden />
             {item.label}
@@ -57,6 +63,7 @@ export function Sidebar({ open, onClose, weeklyPercent }: SidebarProps) {
           <i style={{ width: `${weeklyPercent}%` }} />
         </div>
         <p>La constancia gana. Un día a la vez.</p>
+        <SyncChip onNavigate={onClose} />
         <Link href={SETTINGS_NAV.href} className="settings" onClick={onClose}>
           <SETTINGS_NAV.icon aria-hidden />
           {SETTINGS_NAV.label}

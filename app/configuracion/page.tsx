@@ -5,13 +5,16 @@ import { ArrowRight } from 'lucide-react'
 import { usePreferences } from '@/hooks/usePreferences'
 import { PreferenceRow } from '@/components/settings/PreferenceRow'
 import { ExportImportPanel } from '@/components/settings/ExportImportPanel'
+import { SyncPanel } from '@/components/sync/SyncPanel'
 import { Switch } from '@/components/ui/switch'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
-import type { ThemePreference, WeekStartDay, WeightUnit } from '@/types'
+import { useActiveProfile } from '@/lib/profile/ProfileContext'
+import { PROFILES, PROFILE_LABELS, type ThemePreference, type WeekStartDay, type WeightUnit } from '@/types'
 
 export default function ConfiguracionPage() {
   const { preferences, setPreferences, loaded } = usePreferences()
+  const { profile, setProfile } = useActiveProfile()
 
   if (!loaded) return null
 
@@ -29,6 +32,21 @@ export default function ConfiguracionPage() {
       <div style={{ maxWidth: 560, marginTop: 20 }}>
         <section>
           <h2 style={{ fontSize: 14, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.08em', marginTop: 24 }}>General</h2>
+
+          <PreferenceRow label="Perfil activo" description="Qué rutina muestra este dispositivo">
+            <Select items={Object.fromEntries(PROFILES.map((p) => [p, PROFILE_LABELS[p]]))} value={profile} onValueChange={(v) => v && setProfile(v as typeof profile)}>
+              <SelectTrigger className="w-32">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {PROFILES.map((p) => (
+                  <SelectItem key={p} value={p}>
+                    {PROFILE_LABELS[p]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </PreferenceRow>
 
           <PreferenceRow label="Unidades" description="Cómo se muestra y registra el peso">
             <Select items={{ kg: 'kg', lb: 'lb' }} value={preferences.units} onValueChange={(v) => v && setPreferences({ units: v as WeightUnit })}>
@@ -112,6 +130,15 @@ export default function ConfiguracionPage() {
               Editar <ArrowRight size={14} />
             </Link>
           </PreferenceRow>
+        </section>
+
+        <section style={{ marginTop: 30 }}>
+          <h2 style={{ fontSize: 14, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: 4 }}>Sincronización</h2>
+          <p style={{ fontSize: 13, color: 'var(--muted)', margin: 0, lineHeight: 1.5 }}>
+            Tus entrenamientos se guardan en este dispositivo y, si vinculás tu cuenta, también en la nube para verlos
+            desde el celular y la computadora.
+          </p>
+          <SyncPanel />
         </section>
 
         <section style={{ marginTop: 30, marginBottom: 40 }}>

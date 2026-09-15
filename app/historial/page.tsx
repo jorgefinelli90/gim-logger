@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { History as HistoryIcon, Trophy } from 'lucide-react'
 import { useStorageReady } from '@/hooks/useStorageReady'
 import { useStatistics } from '@/hooks/useStatistics'
+import { useActiveProfile } from '@/lib/profile/ProfileContext'
 import { Tabs, TabsList, TabsPanel, TabsTab } from '@/components/ui/tabs'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { EmptyState } from '@/components/common/EmptyState'
@@ -13,7 +14,8 @@ import type { SessionType } from '@/types'
 
 export default function HistorialPage() {
   const { ready } = useStorageReady()
-  const stats = useStatistics(ready)
+  const { profile } = useActiveProfile()
+  const stats = useStatistics(profile, ready)
   const [tab, setTab] = useState('fecha')
 
   return (

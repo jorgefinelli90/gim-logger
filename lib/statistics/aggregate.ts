@@ -1,4 +1,4 @@
-import type { Exercise, ExerciseSet, MuscleGroup, WorkoutSession } from '@/types'
+import type { Exercise, ExerciseSet, MuscleGroup, Profile, WorkoutSession } from '@/types'
 import { addDays, sessionTypeForDate, todayIso } from '@/lib/date/date-utils'
 
 export interface StreakResult {
@@ -13,7 +13,7 @@ function isSessionCompleted(session: WorkoutSession, sets: ExerciseSet[]): boole
 }
 
 /** A date "counts" toward a streak if it was a training day (not rest) and it has a completed session. */
-export function computeStreaks(sessions: WorkoutSession[], sets: ExerciseSet[], today: string = todayIso()): StreakResult {
+export function computeStreaks(profile: Profile, sessions: WorkoutSession[], sets: ExerciseSet[], today: string = todayIso()): StreakResult {
   const completedDates = new Set(
     sessions.filter((s) => s.type !== 'descanso' && isSessionCompleted(s, sets)).map((s) => s.date),
   )
@@ -22,7 +22,7 @@ export function computeStreaks(sessions: WorkoutSession[], sets: ExerciseSet[], 
   let cursor = today
   // Walk backward from today; rest days don't break the streak, missed training days do.
   while (true) {
-    const type = sessionTypeForDate(cursor)
+    const type = sessionTypeForDate(profile, cursor)
     if (type === 'descanso') {
       cursor = addDays(cursor, -1)
       continue
@@ -44,7 +44,7 @@ export function computeStreaks(sessions: WorkoutSession[], sets: ExerciseSet[], 
   const latest = sortedDates[sortedDates.length - 1]
   let d = earliest
   while (d <= latest) {
-    const type = sessionTypeForDate(d)
+    const type = sessionTypeForDate(profile, d)
     if (type !== 'descanso') {
       if (completedDates.has(d)) {
         running += 1

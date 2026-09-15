@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Plus } from 'lucide-react'
-import type { ExerciseCategory, MuscleGroup, PlanDayId, TrackingMode } from '@/types'
+import type { ExerciseCategory, MuscleGroup, PlanDayId, Profile, TrackingMode } from '@/types'
 import { useExercises } from '@/hooks/useExercises'
 import { usePlanEditor } from '@/hooks/usePlanEditor'
 import { Button } from '@/components/ui/button'
@@ -31,6 +31,7 @@ const EMPTY_FORM: FormState = {
 }
 
 interface AddExerciseDialogProps {
+  profile: Profile
   planId: PlanDayId
   category: ExerciseCategory
   storageReady: boolean
@@ -40,9 +41,9 @@ interface AddExerciseDialogProps {
 }
 
 /** Creates a custom exercise and appends it to a plan in one step. */
-export function AddExerciseDialog({ planId, category, storageReady, onAdded, triggerLabel = 'Agregar ejercicio' }: AddExerciseDialogProps) {
-  const { addExercise } = usePlanEditor(planId, storageReady)
-  const { exercises, add: addExerciseRecord } = useExercises(storageReady)
+export function AddExerciseDialog({ profile, planId, category, storageReady, onAdded, triggerLabel = 'Agregar ejercicio' }: AddExerciseDialogProps) {
+  const { addExercise } = usePlanEditor(profile, planId, storageReady)
+  const { exercises, add: addExerciseRecord } = useExercises(profile, storageReady)
   const [open, setOpen] = useState(false)
   const [saving, setSaving] = useState(false)
   const [form, setForm] = useState<FormState>(EMPTY_FORM)
@@ -52,6 +53,7 @@ export function AddExerciseDialog({ planId, category, storageReady, onAdded, tri
     setSaving(true)
     try {
       const created = await addExerciseRecord({
+        profile,
         name: form.name.trim(),
         aliases: [],
         muscleGroup: form.muscleGroup,
