@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import type { Session } from '@supabase/supabase-js'
 import { getSupabase, isSyncConfigured } from '@/lib/supabase/client'
 import { countPending, getLastSyncAt, linkDevice, syncNow as runSync } from '@/lib/sync/engine'
+import { findAccount } from '@/lib/auth/accounts'
 
 /**
  * Estado del sincronizado, disponible en toda la app.
@@ -15,6 +16,10 @@ import { countPending, getLastSyncAt, linkDevice, syncNow as runSync } from '@/l
 
 export type SyncStatus =
   | 'off' // sin credenciales: modo local puro
+  /** Todavía leyendo la sesión guardada en el dispositivo. Es un estado real
+   *  y no un detalle interno: sin él, al recargar se vería un parpadeo de la
+   *  pantalla de login aunque la persona ya estuviera adentro. */
+  | 'restoring'
   | 'signed-out'
   | 'syncing'
   | 'idle'
@@ -26,8 +31,8 @@ interface SyncContextValue {
   lastSyncAt: string | null
   pending: number
   error: string | null
-  /** Manda el magic link al correo indicado. */
-  signIn: (email: string) => Promise<{ ok: boolean; message: string }>
+  /** Login con usuario + contraseña contra una de las cuentas fijas. */
+  signIn: (username: string, password: string) => Promise<{ ok: boolean; message: string }>
   signOut: () => Promise<void>
   sync: () => void
 }
@@ -43,7 +48,8 @@ const PULL_EVERY_MS = 120_000
 export function SyncProvider({ children }: { children: React.ReactNode }) {
   const configured = isSyncConfigured()
   const [session, setSession] = useState<Session | null>(null)
-  const [status, setStatus] = useState<SyncStatus>(configured ? 'signed-out' : 'off')
+  const [sessionResolved, setSessionResolved] = useState(!configured)
+  const [status, setStatus] = useState<SyncStatus>(configured ? 'restoring' : 'off')
   const [lastSyncAt, setLastSyncAt] = useState<string | null>(null)
   const [pending, setPending] = useState(0)
   const [error, setError] = useState<string | null>(null)
@@ -58,16 +64,13 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
 
     let cancelled = false
     void client.auth.getSession().then(({ data }) => {
-      if (!cancelled) setSession(data.session)
+      if (cancelled) return
+      setSession(data.session)
+      setSessionResolved(true)
     })
 
     const { data: listener } = client.auth.onAuthStateChange((_event, next) => {
       setSession(next)
-      // El magic link vuelve con los tokens en el fragmento de la URL;
-      // sacarlos de la barra evita dejar un token en el historial del navegador.
-      if (next && typeof window !== 'undefined' && window.location.hash.includes('access_token')) {
-        window.history.replaceState(null, '', window.location.pathname + window.location.search)
-      }
     })
 
     return () => {
@@ -83,6 +86,10 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
 
     if (!configured) {
       setStatus('off')
+      return
+    }
+    if (!sessionResolved) {
+      setStatus('restoring')
       return
     }
     if (!client || !userId) {
@@ -153,17 +160,29 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
       window.removeEventListener('online', onOnline)
       document.removeEventListener('visibilitychange', onFocus)
     }
-  }, [configured, session])
+  }, [configured, sessionResolved, session])
 
-  const signIn = useCallback(async (email: string) => {
+  const signIn = useCallback(async (username: string, password: string) => {
+    const account = findAccount(username)
+    // Usuario inexistente y contraseña equivocada devuelven el MISMO mensaje:
+    // no hace falta ir confirmando cuáles usuarios existen.
+    const wrong = { ok: false, message: 'Usuario o contraseña incorrectos.' }
+    if (!account) return wrong
+
     const client = getSupabase()
-    if (!client) return { ok: false, message: 'El sincronizado no está configurado en este dispositivo.' }
-    const { error: signInError } = await client.auth.signInWithOtp({
-      email: email.trim(),
-      options: { emailRedirectTo: window.location.origin },
-    })
-    if (signInError) return { ok: false, message: signInError.message }
-    return { ok: true, message: `Te mandamos un link a ${email.trim()}. Abrilo en este dispositivo.` }
+    if (!client) {
+      return { ok: false, message: 'Este dispositivo no tiene configurada la sincronización (falta .env.local).' }
+    }
+
+    const { error: signInError } = await client.auth.signInWithPassword({ email: account.email, password })
+    if (signInError) {
+      // Un fallo de red no es una contraseña mal puesta — decirlo así manda a
+      // la persona a revisar lo que no es.
+      const offline = typeof navigator !== 'undefined' && !navigator.onLine
+      if (offline) return { ok: false, message: 'Sin conexión: no se puede entrar hasta recuperar internet.' }
+      return wrong
+    }
+    return { ok: true, message: `Hola ${account.label}.` }
   }, [])
 
   const signOut = useCallback(async () => {

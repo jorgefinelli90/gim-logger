@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Check, Cloud, CloudUpload, LoaderCircle, TriangleAlert } from 'lucide-react'
+import { Check, CloudUpload, LoaderCircle, TriangleAlert } from 'lucide-react'
 import { useSync } from './SyncProvider'
 
 /** Estado del sync en la barra lateral. Lleva a Configuración de un toque,
@@ -9,13 +9,12 @@ import { useSync } from './SyncProvider'
 export function SyncChip({ onNavigate }: { onNavigate?: () => void }) {
   const { status, pending, error } = useSync()
 
-  // En modo local puro no hay nada que informar: no ensuciamos la barra.
-  if (status === 'off') return null
+  // Sin credenciales no hay nada que informar; sin sesión ni siquiera se ve
+  // la barra (la app muestra el login antes).
+  if (status === 'off' || status === 'signed-out' || status === 'restoring') return null
 
   const { icon: Icon, text, tone } =
-    status === 'signed-out'
-      ? { icon: Cloud, text: 'VINCULAR DISPOSITIVO', tone: '' }
-      : status === 'syncing'
+    status === 'syncing'
         ? { icon: LoaderCircle, text: 'SINCRONIZANDO…', tone: '' }
         : status === 'error'
           ? { icon: TriangleAlert, text: 'ERROR AL SINCRONIZAR', tone: 'is-error' }

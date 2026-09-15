@@ -88,27 +88,51 @@ NEXT_PUBLIC_SUPABASE_URL=https://TU-PROYECTO.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_…
 ```
 
-> La clave publicable viaja en el JavaScript del navegador. RLS exige estar
-> autenticado, pero no separa cuentas entre sí — cualquiera con sesión ve todo,
-> a propósito. **Nunca** pongas la `service_role` acá: esa se saltea RLS entera.
+> La clave publicable viaja en el JavaScript del navegador. RLS no separa a
+> Jorge de Sebastián (se ven todo, a propósito), pero sí exige que la sesión
+> sea de una de las cuentas conocidas. **Nunca** pongas la `service_role` acá:
+> esa se saltea RLS entera.
 
 Reiniciá el dev server para que tome las variables.
 
-### 4. Vincular cada dispositivo
+> ⚠️ **En el deploy (Vercel) hay que cargarlas aparte.** `.env.local` está en
+> `.gitignore` — nunca viaja al repo, así que el build de producción no las
+> tiene a menos que se carguen en *Settings → Environment Variables*. Y como
+> las `NEXT_PUBLIC_*` se incrustan **en el momento del build**, agregarlas no
+> hace nada hasta volver a desplegar. Si faltan, la app arranca en modo local
+> puro y cada dispositivo guarda solo para sí mismo, en silencio.
 
-En **Configuración → Sincronización**, poné tu correo y tocá *Enviarme el link*.
-Te llega un magic link; lo abrís **en ese dispositivo** y queda vinculado. La
-sesión se renueva sola, así que es una sola vez por dispositivo.
+### 4. Entrar en cada dispositivo
 
-Jorge y Sebastián usan cada uno su propio correo (necesitan su propia sesión
-para que su celular sincronice), pero como el acceso es compartido, cualquiera
-de las dos cuentas ve y edita la rutina de ambos. La primera vez que se abre la
-app en un dispositivo, un selector pregunta "¿Quién entrena?" — esa elección
-es local a ese dispositivo y se puede cambiar después desde la barra lateral.
+La app abre con una pantalla de usuario y contraseña. Hay **dos cuentas fijas**,
+una por persona — no hay registro ni recuperación de contraseña:
 
-En el panel de Supabase, en **Authentication → URL Configuration**, agregá a
-*Redirect URLs* las direcciones desde las que vayas a abrir la app
-(`http://localhost:3000` y la del deploy, si la publicás).
+| Usuario | Perfil que abre |
+|---|---|
+| `jor` | Jorge |
+| `sebas` | Sebastián |
+
+Están definidas en [`lib/auth/accounts.ts`](../lib/auth/accounts.ts) y existen
+de verdad en Supabase Auth (creadas por la migración `create_fixed_accounts`,
+con la contraseña hasheada con bcrypt). El "usuario" que se tipea se traduce a
+un correo interno (`jor@ironlog.app`) que **nunca recibe mail**: está solo para
+que Supabase tenga una identidad con la que emitir una sesión, porque sin
+sesión no hay RLS ni sincronización posible.
+
+La sesión queda guardada en el dispositivo y se renueva sola, así que el login
+se ve una vez por aparato, no en cada visita. Con quién entrás define qué
+rutina se abre, pero el selector de la barra lateral sigue permitiendo mirar la
+del otro — los dos ven todo.
+
+> No hace falta configurar *Redirect URLs* en Supabase: con usuario y
+> contraseña no hay ningún link de vuelta que autorizar. Eso era necesario
+> cuando el acceso era por magic link.
+
+**Quién puede entrar:** la policy de RLS ahora exige que el correo de la sesión
+esté en una lista conocida (ver la migración `restrict_access_to_known_accounts`).
+Sin eso, publicada en internet, cualquier desconocido podía registrarse con su
+propio correo y leer o borrar todo. Agregar una persona nueva es sumarla a esa
+lista *y* a `ACCOUNTS`.
 
 ### 5. Qué pasa la primera vez
 

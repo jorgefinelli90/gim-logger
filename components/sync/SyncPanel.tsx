@@ -1,10 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { Check, CloudOff, Cloud, LoaderCircle, Mail, RefreshCw, TriangleAlert } from 'lucide-react'
+import { Check, CloudOff, LoaderCircle, RefreshCw, TriangleAlert } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { useSync } from './SyncProvider'
+import { accountForEmail } from '@/lib/auth/accounts'
 
 /** "hace 2 min" es más útil que un timestamp cuando lo que querés saber es si
  *  el teléfono ya subió la serie que acabás de anotar. */
@@ -28,10 +27,7 @@ const cardStyle: React.CSSProperties = {
 }
 
 export function SyncPanel() {
-  const { status, email, lastSyncAt, pending, error, signIn, signOut, sync } = useSync()
-  const [inputEmail, setInputEmail] = useState('')
-  const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null)
-  const [sending, setSending] = useState(false)
+  const { status, email, lastSyncAt, pending, error, signOut, sync } = useSync()
 
   if (status === 'off') {
     return (
@@ -40,61 +36,16 @@ export function SyncPanel() {
           <CloudOff size={16} aria-hidden /> Sincronización desactivada
         </p>
         <p style={{ fontSize: 13, color: 'var(--muted)', marginTop: 8, lineHeight: 1.5 }}>
-          Este dispositivo guarda todo localmente. Para ver tus entrenamientos también en el celular, agregá las
-          credenciales de Supabase en <code>.env.local</code> y reiniciá la app.
+          A este dispositivo le faltan las credenciales de Supabase
+          (<code>NEXT_PUBLIC_SUPABASE_URL</code> y <code>NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY</code>), así que guarda
+          todo localmente y nada se comparte con los otros aparatos.
         </p>
       </div>
     )
   }
 
-  if (status === 'signed-out') {
-    return (
-      <div style={cardStyle}>
-        <p style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 600 }}>
-          <Cloud size={16} aria-hidden /> Vincular este dispositivo
-        </p>
-        <p style={{ fontSize: 13, color: 'var(--muted)', marginTop: 8, lineHeight: 1.5 }}>
-          Te mandamos un link por correo. Lo abrís una sola vez y este dispositivo queda vinculado.
-        </p>
-        <form
-          onSubmit={async (event) => {
-            event.preventDefault()
-            setSending(true)
-            const result = await signIn(inputEmail)
-            setMessage({ ok: result.ok, text: result.message })
-            setSending(false)
-          }}
-          style={{ display: 'flex', gap: 8, marginTop: 12, flexWrap: 'wrap' }}
-        >
-          <label htmlFor="sync-email" className="sr-only">
-            Tu correo
-          </label>
-          <Input
-            id="sync-email"
-            type="email"
-            required
-            placeholder="tu@correo.com"
-            value={inputEmail}
-            onChange={(event) => setInputEmail(event.target.value)}
-            style={{ flex: '1 1 200px' }}
-          />
-          <Button type="submit" disabled={sending || inputEmail.trim().length === 0}>
-            {sending ? <LoaderCircle size={15} className="spin" aria-hidden /> : <Mail size={15} aria-hidden />}
-            {sending ? 'Enviando…' : 'Enviarme el link'}
-          </Button>
-        </form>
-        {message && (
-          <p
-            role="status"
-            style={{ fontSize: 13, marginTop: 10, color: message.ok ? 'var(--foreground)' : 'var(--danger)' }}
-          >
-            {message.text}
-          </p>
-        )}
-      </div>
-    )
-  }
-
+  // 'signed-out' y 'restoring' no llegan acá: sin sesión la app muestra la
+  // pantalla de login antes de renderizar Configuración.
   return (
     <div style={cardStyle}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
@@ -109,7 +60,11 @@ export function SyncPanel() {
             )}
             {status === 'syncing' ? 'Sincronizando…' : status === 'error' ? 'Error al sincronizar' : 'Sincronizado'}
           </p>
-          <p style={{ fontSize: 13, color: 'var(--muted)', marginTop: 4 }}>{email}</p>
+          {/* El correo interno (jor@ironlog.app) no le dice nada a nadie —
+              se muestra el usuario con el que se entró. */}
+          <p style={{ fontSize: 13, color: 'var(--muted)', marginTop: 4 }}>
+            {accountForEmail(email) ? `Sesión de ${accountForEmail(email)!.label}` : email}
+          </p>
         </div>
         <Button variant="outline" onClick={sync} disabled={status === 'syncing'}>
           <RefreshCw size={15} aria-hidden /> Sincronizar ahora
