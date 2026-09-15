@@ -27,7 +27,13 @@ export function RoutineSwapControl({
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 10 }}>
       <Repeat size={14} aria-hidden style={{ color: 'var(--muted)', flexShrink: 0 }} />
-      <Select items={Object.fromEntries(options.map((o) => [o, sessionTypeLabel(o)]))} value={type === 'descanso' ? undefined : type} onValueChange={(v) => v && onChange(v as Exclude<SessionType, 'descanso'>)}>
+      {/* `null`, no `undefined`, para "sin selección": a Base UI le alcanza
+          con que el valor no sea `undefined` en el primer render para tratar
+          el Select como controlado de por vida. Pasar `undefined` acá (en un
+          día de descanso, antes de elegir algo) lo arrancaba sin controlar, y
+          apenas `type` pasaba a tener un valor real, tiraba el warning de
+          "changing from uncontrolled to controlled". */}
+      <Select items={Object.fromEntries(options.map((o) => [o, sessionTypeLabel(o)]))} value={type === 'descanso' ? null : type} onValueChange={(v) => v && onChange(v as Exclude<SessionType, 'descanso'>)}>
         <SelectTrigger className="h-8 w-auto text-xs">
           <SelectValue placeholder="Cambiar rutina de hoy" />
         </SelectTrigger>
